@@ -1,5 +1,6 @@
 import React from 'react'
 import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs';
+import { SafeAreaView,Text, View} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import SignIn from '../containers/SignIn';
 import SignUp from '../containers/SignUp';
@@ -34,7 +35,9 @@ const StackNav = createMaterialBottomTabNavigator(
 class AuthStack extends React.Component {
   render() {
     return (
-      <StackNav />
+      <SafeAreaView style={{flex:1}}>
+        <StackNav />
+      </SafeAreaView>
     )
   }
 }

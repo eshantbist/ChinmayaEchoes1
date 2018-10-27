@@ -90,7 +90,6 @@ const styles = StyleSheet.create(
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      marginTop:Platform.OS === 'ios' ?20:0,
 
     },
     input: {

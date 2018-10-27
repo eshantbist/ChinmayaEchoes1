@@ -1,24 +1,34 @@
 import React,{Component} from 'react';
-import {Image,ScrollView,TouchableOpacity,Button,View,Text,FlatList,StyleSheet,Platform,Animated,Easing} from 'react-native';
+import {Dimensions,TouchableHighlight,Image,ScrollView,TouchableOpacity,Button,View,Text,FlatList,StyleSheet,Platform,Animated,Easing} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import LogOutHeader from '../containers/LogOutHeader';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import YouTube from 'react-native-youtube';
 
-export default class TweetDetail extends Component{
+
+const width=Dimensions.get('window').width;
+class TweetDetail extends Component{
+
+    state={
+      play:false
+    }
     titleXPos=new Animated.Value(0);
     animatedTitle=(direction=1)=>{
-    Animated.timing(
-      this.titleXPos,
-      {toValue: direction*75,
-        duration:850,
-        easing:Easing.spring
-      }).start(({finished})=> {
-        if(finished){
-          this.animatedTitle(-1*direction);
-        }
-    });
-  }
+      Animated.timing(
+        this.titleXPos,
+        {toValue: direction*75,
+          duration:850,
+          easing:Easing.spring
+        }).start(({finished})=> {
+          if(finished){
+            this.animatedTitle(-1*direction);
+          }
+      });
+    }
+
     onBack=()=>{
-      this.props.navigation.navigate('TweetList')
+      this.props.navigation.navigate('Menu')
     }
 
     onlogout=()=>{
@@ -26,10 +36,21 @@ export default class TweetDetail extends Component{
     }
 
     render() {
-      const tweet=this.props.navigation.state.params.tweet;
+        const { TweetDetailReducer: {
+          tweet
+        }} = this.props;
+        const { TweetDetailReducer: {
+          isVideo
+        }} = this.props;
+        const url=tweet.video_url
+        const videoId = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
+        if(videoId != null) {
+           console.log(videoId[1]);
+        } else {
+            console.log("The youtube url is not valid.");
+        }
         return(
             <View style={styles.mainContainer}>
-              <LogOutHeader onlogout={()=>this.onlogout()}/>
               <ScrollView>
                 <TouchableOpacity onPress={()=>this.onBack()} style={styles.goBack}>
                   <Text style={styles.backLink}>
@@ -38,12 +59,24 @@ export default class TweetDetail extends Component{
                   </Text>
                 </TouchableOpacity>
                     <View>
-                      <Image
-                        source={{uri:tweet.featured_image}}
-                        style={styles.image}/>
-                      <View style={styles.titleView}>
+                      {videoId===null?
+                        (<Image
+                          source={{uri:tweet.featured_image}}
+                          style={styles.image}/>
+                        ):
+                        (<TouchableHighlight onPress={()=>this.setState({play:!this.state.play})}>
+                            <YouTube
+                            videoId={videoId[1]}
+                            play={this.state.play}
+                            fullscreen={false}
+                            loop={true}
+                            style={{ justifyContent:'center',alignSelf: 'stretch', height: 300 }}
+                            />
+                        </TouchableHighlight>)}
+
+                      {(tweet.video_url!=='')&&(<View style={styles.titleView}>
                         <Text style={styles.title}>{tweet.post_title}</Text>
-                      </View>
+                      </View>)}
                       <View style={styles.content}>
                         <Text style={styles.contentMatter}>{tweet.content}</Text>
                       </View>
@@ -54,6 +87,12 @@ export default class TweetDetail extends Component{
    }
 }
 
+const mapStateToProps=(state)=>{
+  return{TweetDetailReducer: state.TweetDetailReducer,VideosTweetsReducer:state.VideosTweetsReducer}
+}
+
+export default connect(mapStateToProps)(TweetDetail);
+
 
 const styles=StyleSheet.create({
   content:{
@@ -63,26 +102,26 @@ const styles=StyleSheet.create({
     borderColor:"#bbb",
     borderWidth:1,
     borderRadius:7,
-    backgroundColor:'#476b6b',
+    backgroundColor:'white',
   },
   contentMatter:{
     fontSize:18,
     fontFamily: 'Cochin',
-    color:'white',
+    color:'black',
   },
   titleView:{
     alignItems:'center',
-    backgroundColor:'#476b6b',
+    backgroundColor:'#bbb',
     padding:10,
 
   },
   title:{
     fontSize:20,
     fontWeight:'bold',
-    color:'white',
+    color:'black',
   },
   image:{
-    height:400,
+    height:420,
     width:'100%',
   },
   backLink:{
@@ -100,8 +139,4 @@ goBack:{
 chevron:{
   fontSize:16
 },
-mainContainer:{
-  marginBottom:35,
-  marginTop:Platform.OS === 'ios' ?20:0,
-}
 });

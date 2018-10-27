@@ -1,4 +1,4 @@
-import {CONFIRM_FORGOT_PASSWORD,CONFIRM_USER,FORGOT_PASSWORD,SIGN_IN,SIGN_UP,ALL_TWEETS,SEARCH_TWEETS,LOG_OUT,LOG_IN,LOG_IN_SUCCESS,LOG_IN_FAILURE,SIGN_UP_SUCCESS,SIGN_UP_FAILURE,SHOW_SIGN_UP_CONFIRMATION_MODAL,CONFIRM_SIGNUP,CONFIRM_SIGNUP_SUCCESS,CONFIRM_SIGNUP_FAILURE,} from './actionTypes'
+import {POSTS_TWEETS,TWEET_DETAIL,QUOTES_TWEETS,VIDEOS_TWEETS,SHOW_OLD_USER_CONFIRMATION_MODAL,CONFIRM_FORGOT_PASSWORD,CONFIRM_USER,FORGOT_PASSWORD,SIGN_IN,SIGN_UP,ALL_TWEETS,SEARCH_TWEETS,LOG_OUT,LOG_IN,LOG_IN_SUCCESS,LOG_IN_FAILURE,SIGN_UP_SUCCESS,SIGN_UP_FAILURE,SHOW_SIGN_UP_CONFIRMATION_MODAL,CONFIRM_SIGNUP,CONFIRM_SIGNUP_SUCCESS,CONFIRM_SIGNUP_FAILURE,} from './actionTypes'
 import Amplify, { Auth } from 'aws-amplify';
 import config from '../Utils/aws-exports';
 import {Alert} from 'react-native';
@@ -39,6 +39,7 @@ export function authenticate(username, password) {
         dispatch(logInSuccess(user))
       })
       .catch(err => {
+        Alert.alert(err.name || JSON.stringify(err));
         console.log('errror from signIn: ', err)
         dispatch(logInFailure(err))
       });
@@ -76,29 +77,63 @@ export function createUser(username, password, email, phone_number) {
     } else {
       phone = '+1' + phone_number
     }
-    Auth.signUp({
-      username,
-      password,
-      attributes: {
-        email,
-        phone_number: phone
-      }
-    })
-    .then(data => {
-      console.log('data from signUp: ', data)
-      dispatch(signUpSuccess(data))
-      dispatch(showSignUpConfirmationModal())
-    })
-    .catch(err => {
-      console.log('error signing up: ', err)
-      dispatch(signUpFailure(err))
-    });
+
+    Auth.signIn( username, password )
+    .then( user => {
+      Alert.alert('User exists go to Sign In ')
+        return Auth.signOut();
+    } )
+
+    .catch( err => {
+          console.log(err.name)
+          if(err.name==='UserNotFoundException')
+          {
+               Auth.signUp({
+                      username,
+                      password,
+                      attributes: {
+                        email,
+                        phone_number: phone
+                      }
+                    })
+                    .then(data => {
+                      console.log('data from signUp: ', data)
+                      dispatch(signUpSuccess(data))
+                      dispatch(showSignUpConfirmationModal())
+                    })
+                    .catch(err => {
+                      console.log('error signing up: ', err)
+                      Alert.alert(err.name || JSON.stringify(err));
+                      dispatch(signUpFailure(err))
+                    });
+            }
+            if(err.name==='UserNotConfirmedException')
+            {
+              Auth.resendSignUp(username)
+                   .then(data => {
+                     dispatch(signUpSuccess(data))
+                     dispatch(showOldUserConfirmationModal())
+                   })
+                   .catch(err => {
+                     console.log('error signing up: ', err)
+                     Alert.alert(err.name || JSON.stringify(err));
+                     dispatch(signUpFailure(err))
+                   });
+              }
+        } );
+
   }
 }
 
 export function showSignUpConfirmationModal() {
   return {
     type: SHOW_SIGN_UP_CONFIRMATION_MODAL
+  }
+}
+
+export function showOldUserConfirmationModal() {
+  return {
+    type: SHOW_OLD_USER_CONFIRMATION_MODAL
   }
 }
 
@@ -114,7 +149,7 @@ export function confirmUserSignUp(username, authCode) {
         }, 0)
       })
       .catch(err => {
-        Alert.alert(err.message || JSON.stringify(err));
+        //Alert.alert(err.message || JSON.stringify(err));
         dispatch(confirmSignUpFailure(err))
       });
   }
@@ -147,34 +182,102 @@ export function fetchtweets(){
            response.json().
            then(json => {
              const tweets=json;
-             dispatch(tweetlist(tweets))
+             dispatch(alltweetlist(tweets))
            })
          })
          .catch();
     }
 }
 
-export function filter(term,filter){
+export function videosFilter(){
     return (dispatch) => {
-      const TERM=term;
-      const FILTER=filter;
-      const url = `https://staging.chinmayamission.com/wp-json/gcmw/v1/tweet/search?term=${TERM}&category=${FILTER}`;
+      const FILTER='Videos';
+      const url = `https://staging.chinmayamission.com/wp-json/gcmw/v1/tweet/search?category=${FILTER}`;
       fetch(url)
          .then(response => {
            response.json().
            then(json => {
              const tweets=json;
              console.log(tweets);
-             dispatch(tweetlist(tweets))
+             dispatch(videostweetlist(tweets))
            })
          })
          .catch();
     }
 }
 
-function tweetlist(tweets){
+export function quotesFilter(){
+    return (dispatch) => {
+      const FILTER='Quotes';
+      const url = `https://staging.chinmayamission.com/wp-json/gcmw/v1/tweet/search?category=${FILTER}`;
+      fetch(url)
+         .then(response => {
+           response.json().
+           then(json => {
+             const tweets=json;
+             dispatch(quotestweetlist(tweets))
+           })
+         })
+         .catch();
+    }
+}
+
+export function postsFilter(){
+    return (dispatch) => {
+      const FILTER='Posts';
+      const url = `https://staging.chinmayamission.com/wp-json/gcmw/v1/tweet/search?category=${FILTER}`;
+      fetch(url)
+         .then(response => {
+           response.json().
+           then(json => {
+             const tweets=json;
+             dispatch(poststweetlist(tweets))
+           })
+         })
+         .catch();
+    }
+}
+
+export function searchAll(term){
+    return (dispatch) => {
+      const TERM=term;
+      const url = `https://staging.chinmayamission.com/wp-json/gcmw/v1/tweet/search?term=${TERM}`;
+      fetch(url)
+         .then(response => {
+           response.json().
+           then(json => {
+             const tweets=json;
+             dispatch(alltweetlist(tweets))
+           })
+         })
+         .catch();
+    }
+}
+
+function alltweetlist(tweets){
   return{
     type:ALL_TWEETS,
+    tweets
+  };
+}
+
+function videostweetlist(tweets){
+  return{
+    type:VIDEOS_TWEETS,
+    tweets
+  };
+}
+
+function quotestweetlist(tweets){
+  return{
+    type:QUOTES_TWEETS,
+    tweets
+  };
+}
+
+function poststweetlist(tweets){
+  return{
+    type:POSTS_TWEETS,
     tweets
   };
 }
@@ -234,5 +337,12 @@ export function cancelForgotPassword(){
 export function closeSignUpModal() {
   return {
     type: CONFIRM_SIGNUP_SUCCESS
+  }
+}
+
+export function tweetDetail(tweet){
+  return{
+    type:TWEET_DETAIL,
+    tweet:tweet
   }
 }

@@ -9,7 +9,7 @@ export default class TweetItem extends Component{
         return(
           <TouchableOpacity key={tweet.id} onPress={this.props.onPress} style={styles.tweet}>
             <View style={styles.info}>
-              <Text style={styles.title}>{tweet.post_title}</Text>
+              {(tweet.video_url!=='')&&(<Text style={styles.title}>{tweet.post_title}</Text>)}
               <Text style={styles.date}>{tweet.tweet_date}</Text>
               <Image
                     source={{uri:tweet.featured_image}}

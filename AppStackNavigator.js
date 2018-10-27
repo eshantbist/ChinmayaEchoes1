@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button,Platform, StyleSheet, Text, View} from 'react-native';
 import {createStackNavigator,createSwitchNavigator} from 'react-navigation';
-import AppStack from './src/stacks/AppStack';
+import MenuStack from './src/stacks/MenuStack';
 import AuthStack from './src/stacks/AuthStack';
 import ForgotPasswordStack from './src/stacks/ForgotPasswordStack';
 import config from './src/Utils/aws-exports';
@@ -47,7 +47,7 @@ class AppStackNavigator extends React.Component {
 
     if (loggedIn) {
       return (
-        <AppStack />
+        <MenuStack />
       )
     }
     return (

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {TouchableHighlight,Text, View, StyleSheet,TouchableOpacity,Platform} from 'react-native';
+import {Image,TouchableHighlight,Text, View, StyleSheet,TouchableOpacity,Platform} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default class Header extends Component{
@@ -7,10 +7,11 @@ export default class Header extends Component{
   render(){
     return(
       <View style={styles.heading}>
-          <FontAwesome name={'home'} style={styles.homeIcon}/>
+          <Image source={require('../Image/logo.png')} style={styles.logo} />
+          {/*<FontAwesome name={'home'} style={styles.homeIcon}/>
           <Text style={styles.headingText}>
             Chinmaya Echoes
-          </Text>
+          </Text>*/}
       </View>
     );
   }
@@ -34,5 +35,9 @@ const styles = StyleSheet.create({
     fontWeight:'800',
     color:'black',
     fontFamily:Platform.OS === 'ios' ? 'cochin' : 'monospace'
-  }
+  },
+  logo:{
+    height:30,
+    width:100,
+  },
 });

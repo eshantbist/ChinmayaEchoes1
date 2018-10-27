@@ -41,11 +41,6 @@ class SignUp extends Component {
     this.props.navigation.navigate('SignIn')
   }
 
-  resendOtp=()=>{
-    const { authCode, username } = this.state
-    this.props.confirmUserSignUp(username, authCode);
-  }
-
   componentWillReceiveProps(nextProps) {
     const { SignUpReducer: { showSignUpConfirmationModal }} = nextProps
     if (!showSignUpConfirmationModal && this.props.SignUpReducer.showSignUpConfirmationModal) {
@@ -69,7 +64,8 @@ class SignUp extends Component {
       showSignUpConfirmationModal,
       isAuthenticating,
       signUpError,
-      signUpErrorMessage
+      signUpErrorMessage,
+      showOldUserConfirmationModal
     }} = this.props
     return (
       <View style={styles.container}>
@@ -132,10 +128,32 @@ class SignUp extends Component {
                     isLoading={isAuthenticating}
                   />
                 </View>
+                <View>
+                  <Button
+                    title='Cancel'
+                    onPress={this.props.closeSignUpModal}
+                  />
+                </View>
+              </View>
+            </Modal>
+          )
+        }
+        {
+          showOldUserConfirmationModal && (
+            <Modal onRequestClose={this.props.closeSignUpModal}>
+              <View style={styles.modal}>
+                <Text>You have already a account just verify your Otp</Text>
+                <TextInput
+                  placeholder="Authorization Code"
+                  onChangeText={value => this.onChangeText('authCode',value)}
+                  value={this.state.authCode}
+                  keyboardType='numeric'
+                  style={styles.modalInput}
+                />
                 <View style={{marginBottom:10}}>
                   <Button
-                    title='Resend Otp'
-                    onPress={()=>this.resendOtp()}
+                    title='Confirm'
+                    onPress={()=>this.confirm()}
                     isLoading={isAuthenticating}
                   />
                 </View>
@@ -169,7 +187,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop:Platform.OS === 'ios' ?20:0,
   },
   modal: {
     flex: 1,

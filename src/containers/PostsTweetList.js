@@ -9,11 +9,11 @@ import LogOutHeader from './LogOutHeader';
 import Amplify, { Auth } from 'aws-amplify';
 import config from '../Utils/aws-exports';
 import {logOut} from '../actions';
-import {fetchtweets} from '../actions';
+import {postsFilter,tweetDetail} from '../actions';
 Amplify.configure(config)
 
 
-class TweetList extends Component{
+class PostsTweetList extends Component{
 
     titleXPos=new Animated.Value(0);
     animatedTitle=(direction=1)=>{
@@ -31,17 +31,18 @@ class TweetList extends Component{
     }
 
     async componentDidMount() {
-      this.props.fetchtweets();
+      this.props.postsFilter();
       this.animatedTitle();
     }
 
     goToDetail=(Id)=>{
-      const { TweetsReducer: {
+      const { PostsTweetsReducer: {
         tweets
       }} = this.props;
 
       const tweet=tweets.find((tweet) => tweet.id === Id);
-      this.props.navigation.navigate('TweetDetail',{tweet:tweet});
+      this.props.tweetDetail(tweet);
+      this.props.navigation.navigate('App');
 
     }
 
@@ -60,24 +61,18 @@ class TweetList extends Component{
     }
 
     render() {
-      const { TweetsReducer: {
+      const { PostsTweetsReducer: {
         tweets
       }} = this.props;
       if(tweets!==null)
       {
         return(
-          <View style={styles.mainContainer}>
-            <LogOutHeader/>
-            <View style={styles.search}>
-              <SearchBar/>
-            </View>
-            <View style={styles.scrollContainer}>
+          <View style={styles.scrollContainer}>
               <FlatList
                 data={tweets}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({item}) => <TweetItem onPress={()=>this.goToDetail(item.id)} tweet={item}/>}
                 />
-            </View>
           </View>
         );
       }
@@ -91,23 +86,18 @@ class TweetList extends Component{
 
 
 const mapStateToProps=(state)=>{
-  return{TweetsReducer: state.TweetsReducer}
+  return{PostsTweetsReducer: state.PostsTweetsReducer}
 }
 
 const mapDispatchToProps=(dispatch)=>{
-  return bindActionCreators({logOut,fetchtweets},dispatch);
+  return bindActionCreators({logOut,postsFilter,tweetDetail},dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TweetList);
+export default connect(mapStateToProps, mapDispatchToProps)(PostsTweetList);
 
 const styles=StyleSheet.create({
-    mainContainer:{
-      backgroundColor:'#e6e6e6',
-      marginTop:Platform.OS === 'ios' ?20:0,
-      marginBottom:Platform.OS === 'ios' ?30:35,
-    },
     scrollContainer:{
-      marginBottom:150,
+      backgroundColor:'#e6e6e6',
     },
     container: {
         flex: 1,
@@ -120,9 +110,6 @@ const styles=StyleSheet.create({
     button:{
         flexDirection:'row',
         justifyContent: 'center',
-    },
-    search:{
-      marginBottom:10,
     },
 
 });

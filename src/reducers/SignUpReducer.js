@@ -5,7 +5,8 @@ const signUpInitialState = {
   showSignUpConfirmationModal: false,
   confirmSignUpError: false,
   signUpErrorMessage: '',
-  confirmSignUpErrorMessage: ''
+  confirmSignUpErrorMessage: '',
+  showOldUserConfirmationModal:false
 }
 const SignUpReducer=(state=signUpInitialState,action)=>{
   switch (action.type) {
@@ -14,6 +15,12 @@ const SignUpReducer=(state=signUpInitialState,action)=>{
         ...state,
         isAuthenticating: false,
         showSignUpConfirmationModal: true
+      }
+      case 'SHOW_OLD_USER_CONFIRMATION_MODAL':
+      return {
+        ...state,
+        isAuthenticating: false,
+        showOldUserConfirmationModal: true
       }
     case 'CONFIRM_SIGNUP':
       return {
@@ -24,7 +31,8 @@ const SignUpReducer=(state=signUpInitialState,action)=>{
       return {
         ...state,
         isAuthenticating: false,
-        showSignUpConfirmationModal: false
+        showSignUpConfirmationModal: false,
+        showOldUserConfirmationModal: false
       }
     case 'CONFIRM_SIGNUP_FAILURE':
       return {
