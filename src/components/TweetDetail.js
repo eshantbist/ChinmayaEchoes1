@@ -67,6 +67,7 @@ class TweetDetail extends Component{
                         (<TouchableHighlight onPress={()=>this.setState({play:!this.state.play})}>
                             <YouTube
                             videoId={videoId[1]}
+                            apiKey='AIzaSyBVzrXQ6_qUDtb4SCBgHdirtZbzybwSRjs'
                             play={this.state.play}
                             fullscreen={false}
                             loop={true}
