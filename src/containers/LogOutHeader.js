@@ -132,6 +132,8 @@ const styles = StyleSheet.create({
     fontFamily:"Times New Roman",
     fontSize:16,
     textAlign:'left',
+    padding:0,
+    marginTop:Platform.OS === 'ios' ?0 : -5,
   },
   inputView:{
     marginLeft:10,
