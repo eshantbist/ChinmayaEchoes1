@@ -18,6 +18,8 @@ target 'ChinmayaEchoes' do
 
   pod 'react-native-video', :path => '../node_modules/react-native-video'
 
+  pod 'RNAWSCognito', :path => '../node_modules/amazon-cognito-identity-js'
+
   target 'ChinmayaEchoesTests' do
     inherit! :search_paths
     # Pods for testing
