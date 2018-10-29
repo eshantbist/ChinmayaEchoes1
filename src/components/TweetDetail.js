@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Dimensions,TouchableHighlight,Image,ScrollView,TouchableOpacity,Button,View,Text,FlatList,StyleSheet,Platform,Animated,Easing} from 'react-native';
+import {BackHandler,Dimensions,TouchableHighlight,Image,ScrollView,TouchableOpacity,Button,View,Text,FlatList,StyleSheet,Platform,Animated,Easing} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import LogOutHeader from '../containers/LogOutHeader';
 import {connect} from 'react-redux';
@@ -25,6 +25,17 @@ class TweetDetail extends Component{
             this.animatedTitle(-1*direction);
           }
       });
+    }
+
+    componentDidMount() {
+      this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+        this.props.navigation.navigate('Menu')
+        return true;
+      });
+    }
+
+    componentWillUnmount() {
+      this.backHandler.remove();
     }
 
     onBack=()=>{
@@ -64,11 +75,11 @@ class TweetDetail extends Component{
                           source={{uri:tweet.featured_image}}
                           style={styles.image}/>
                         ):
-                        (<TouchableHighlight onPress={()=>this.setState({play:!this.state.play})}>
+                        (<TouchableHighlight>
                             <YouTube
                             videoId={videoId[1]}
                             apiKey='AIzaSyBVzrXQ6_qUDtb4SCBgHdirtZbzybwSRjs'
-                            play={this.state.play}
+                            play={true}
                             fullscreen={false}
                             loop={true}
                             style={{ justifyContent:'center',alignSelf: 'stretch', height: 300 }}

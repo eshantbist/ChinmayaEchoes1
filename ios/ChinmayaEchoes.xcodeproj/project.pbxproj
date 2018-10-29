@@ -65,6 +65,7 @@
 		EC07376A21831C3E0036498F /* libRCTYouTube.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC07376321831C130036498F /* libRCTYouTube.a */; };
 		EC12068C21831DC600D5F817 /* YTPlayerView-iframe-player.html in Resources */ = {isa = PBXBuildFile; fileRef = EC12065E21831DC600D5F817 /* YTPlayerView-iframe-player.html */; };
 		EC719C8921843C370020ED3C /* libRNAWSCognito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC719C8621843C1E0020ED3C /* libRNAWSCognito.a */; };
+		ECEB0FB82184804100B00B32 /* libRCTVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEB0FB52184802700B00B32 /* libRCTVideo.a */; };
 		FDB116B68332FC8CB744AD4C /* libPods-ChinmayaEchoes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1208AAFB6CC5193DF492465 /* libPods-ChinmayaEchoes.a */; };
 /* End PBXBuildFile section */
 
@@ -398,6 +399,20 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNAWSCognito;
 		};
+		ECEB0FB42184802700B00B32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECEB0FAF2184802600B00B32 /* RCTVideo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTVideo;
+		};
+		ECEB0FB62184802700B00B32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECEB0FAF2184802600B00B32 /* RCTVideo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 641E28441F0EEC8500443AF6;
+			remoteInfo = "RCTVideo-tvOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -464,6 +479,7 @@
 		EC07376421831C170036498F /* RCTYouTube.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTYouTube.xcodeproj; path = "../node_modules/react-native-youtube/RCTYouTube.xcodeproj"; sourceTree = "<group>"; };
 		EC12065E21831DC600D5F817 /* YTPlayerView-iframe-player.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "YTPlayerView-iframe-player.html"; path = "../node_modules/react-native-youtube/assets/YTPlayerView-iframe-player.html"; sourceTree = "<group>"; };
 		EC719C5721843C1E0020ED3C /* RNAWSCognito.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNAWSCognito.xcodeproj; path = "../node_modules/amazon-cognito-identity-js/ios/RNAWSCognito.xcodeproj"; sourceTree = "<group>"; };
+		ECEB0FAF2184802600B00B32 /* RCTVideo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTVideo.xcodeproj; path = "../node_modules/react-native-video/ios/RCTVideo.xcodeproj"; sourceTree = "<group>"; };
 		F0E8C60CB9F04563BE2FBA49 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		F33E38962632471786E5E0AF /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		FA1FD0A3A5084406B3E2F931 /* libAppCenterReactNativeAnalytics.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAppCenterReactNativeAnalytics.a; sourceTree = "<group>"; };
@@ -484,6 +500,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECEB0FB82184804100B00B32 /* libRCTVideo.a in Frameworks */,
 				EC719C8921843C370020ED3C /* libRNAWSCognito.a in Frameworks */,
 				EC07376A21831C3E0036498F /* libRCTYouTube.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
@@ -700,6 +717,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				ECEB0FAF2184802600B00B32 /* RCTVideo.xcodeproj */,
 				EC719C5721843C1E0020ED3C /* RNAWSCognito.xcodeproj */,
 				EC07376421831C170036498F /* RCTYouTube.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
@@ -861,6 +879,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		ECEB0FB02184802600B00B32 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ECEB0FB52184802700B00B32 /* libRCTVideo.a */,
+				ECEB0FB72184802700B00B32 /* libRCTVideo.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -953,6 +980,9 @@
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = DH5TRCHPW3;
+					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
@@ -1027,6 +1057,10 @@
 				{
 					ProductGroup = 00C302E01ABCB9EE00DB3ED1 /* Products */;
 					ProjectRef = 00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */;
+				},
+				{
+					ProductGroup = ECEB0FB02184802600B00B32 /* Products */;
+					ProjectRef = ECEB0FAF2184802600B00B32 /* RCTVideo.xcodeproj */;
 				},
 				{
 					ProductGroup = 139FDEE71B06529A00C62182 /* Products */;
@@ -1379,6 +1413,20 @@
 			remoteRef = EC719C8521843C1E0020ED3C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		ECEB0FB52184802700B00B32 /* libRCTVideo.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTVideo.a;
+			remoteRef = ECEB0FB42184802700B00B32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		ECEB0FB72184802700B00B32 /* libRCTVideo.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTVideo.a;
+			remoteRef = ECEB0FB62184802700B00B32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1676,8 +1724,10 @@
 			baseConfigurationReference = A5EF07F82E5B9C214ACEEDC1 /* Pods-ChinmayaEchoes.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = DH5TRCHPW3;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
@@ -1703,7 +1753,9 @@
 			baseConfigurationReference = 60717D901D8F7AA78A82C3E3 /* Pods-ChinmayaEchoes.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DH5TRCHPW3;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
