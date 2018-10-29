@@ -5,6 +5,7 @@ import LogOutHeader from '../containers/LogOutHeader';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import YouTube from 'react-native-youtube';
+import ResponsiveImage from 'react-native-responsive-image';
 
 
 const width=Dimensions.get('window').width;
@@ -72,6 +73,7 @@ class TweetDetail extends Component{
                     <View>
                       {videoId===null?
                         (<Image
+                          resizeMode = 'stretch'
                           source={{uri:tweet.featured_image}}
                           style={styles.image}/>
                         ):
@@ -133,8 +135,9 @@ const styles=StyleSheet.create({
     color:'black',
   },
   image:{
-    height:420,
+    height:400,
     width:'100%',
+    overflow: 'visible',
   },
   backLink:{
   marginBottom:5,
