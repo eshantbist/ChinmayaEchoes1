@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import YouTube from 'react-native-youtube';
 import ResponsiveImage from 'react-native-responsive-image';
+import { ZoomableImage } from 'react-native-zoomable-image'
 
 
 const width=Dimensions.get('window').width;
@@ -72,10 +73,18 @@ class TweetDetail extends Component{
                 </TouchableOpacity>
                     <View>
                       {videoId===null?
-                        (<Image
+                        ({/*<Image
                           resizeMode = 'stretch'
                           source={{uri:tweet.featured_image}}
-                          style={styles.image}/>
+                          style={styles.image}/>*/},
+                          <ZoomableImage
+                            source={{
+                              uri:tweet.featured_image,
+                              width: width,
+                              height: 400,
+                            }}
+                            resizeMode = 'stretch'
+                          />
                         ):
                         (<TouchableHighlight>
                             <YouTube

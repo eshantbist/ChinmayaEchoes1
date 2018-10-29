@@ -2,7 +2,6 @@ import React,{Component} from 'react';
 import {Image,Dimensions,ScrollView,TouchableOpacity,Button,View,Text,FlatList,StyleSheet,Platform,Animated,Easing} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import SearchBar from './SearchBar';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import TweetItem from '../components/TweetItem';
 import LogOutHeader from './LogOutHeader';

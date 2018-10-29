@@ -13,7 +13,7 @@ export default class TweetItem extends Component{
               <Text style={styles.date}>{tweet.tweet_date}</Text>
               <Image
                     source={{uri:tweet.featured_image}}
-                    style={{height:250, width:'100%'}}
+                    style={{height:300, width:'100%'}}
                     resizeMode = 'stretch'/>
               <Text style={styles.content}>{tweet.content.slice(0,100)}</Text>
             </View>
