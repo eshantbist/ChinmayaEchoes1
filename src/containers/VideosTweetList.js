@@ -14,33 +14,54 @@ Amplify.configure(config)
 
 class VideosTweetList extends Component{
 
-    titleXPos=new Animated.Value(0);
-    animatedTitle=(direction=1)=>{
-    const width=Dimensions.get('window').width-230;
-    Animated.timing(
-        this.titleXPos,
-        {toValue: direction*(width/2),
-          duration:700,
-          easing:Easing.spring
-        }).start(({finished})=> {
-          if(finished){
-            this.animatedTitle(-1*direction);
+    // titleXPos=new Animated.Value(0);
+    // animatedTitle=(direction=1)=>{
+    // const width=Dimensions.get('window').width-230;
+    // Animated.timing(
+    //     this.titleXPos,
+    //     {toValue: direction*(width/2),
+    //       duration:700,
+    //       easing:Easing.spring
+    //     }).start(({finished})=> {
+    //       if(finished){
+    //         this.animatedTitle(-1*direction);
+    //       }
+    //     });
+    // }
+
+    loadingSpin=new Animated.Value(0);
+
+    spinAnimation(){
+      this.loadingSpin.setValue(0);
+      Animated.sequence([
+        Animated.timing(
+          this.loadingSpin,
+          {
+            toValue:1,
+            duration:1000,
           }
-        });
+        )
+      ]).start(()=>this.spinAnimation());
     }
 
     async componentDidMount() {
-      this.props.videosFilter();
-      this.animatedTitle();
+      const { VideosTweetsReducer: {
+        tweetsAvailable
+      }} = this.props;
+      if(tweetsAvailable===false){
+        this.props.videosFilter();
+      }
+      this.spinAnimation();
     }
 
     goToDetail=(Id)=>{
       const { VideosTweetsReducer: {
-        tweets
+        tweets,tweetsAvailable
       }} = this.props;
+      const gotoScreen='Videos'
 
       const tweet=tweets.find((tweet) => tweet.id === Id);
-      this.props.tweetDetail(tweet);
+      this.props.tweetDetail(tweet,gotoScreen);
       this.props.navigation.navigate('App');
 
     }
@@ -61,9 +82,13 @@ class VideosTweetList extends Component{
 
     render() {
       const { VideosTweetsReducer: {
-        tweets
+        tweets,tweetsAvailable
       }} = this.props;
-      if(tweets!==null)
+      const spin=this.loadingSpin.interpolate({
+          inputRange:[0,1],
+          outputRange:['0deg','360deg']
+      });
+      if(tweetsAvailable===true)
       {
         return(
           <View style={styles.scrollContainer}>
@@ -76,9 +101,9 @@ class VideosTweetList extends Component{
         );
       }
       return (
-        <Animated.View style={[{left:this.titleXPos}, styles.container]}>
-            <Text style={styles.header}>Chinmaya Echoes</Text>
-        </Animated.View>
+        <View style={{backgroundColor:'grey',flex:1,alignItems: 'center',justifyContent: 'center',padding:20,}}>
+          <Animated.Image resizeMode='stretch' style={{transform: [{rotate:spin}] ,backgroundColor:'white' ,borderColor:'black',borderWidth:1,borderRadius:10,height:100,width:100}} source={require('../Image/logo.png')} />
+        </View>
       );
     }
 }

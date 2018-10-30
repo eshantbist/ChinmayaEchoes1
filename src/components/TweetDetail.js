@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {BackHandler,Dimensions,TouchableHighlight,Image,ScrollView,TouchableOpacity,Button,View,Text,FlatList,StyleSheet,Platform,Animated,Easing} from 'react-native';
+import {Alert,BackHandler,Dimensions,TouchableHighlight,Image,ScrollView,TouchableOpacity,Button,View,Text,FlatList,StyleSheet,Platform,Animated,Easing} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import LogOutHeader from '../containers/LogOutHeader';
 import {connect} from 'react-redux';
@@ -12,9 +12,6 @@ import { ZoomableImage } from 'react-native-zoomable-image'
 const width=Dimensions.get('window').width;
 class TweetDetail extends Component{
 
-    state={
-      play:false
-    }
     titleXPos=new Animated.Value(0);
     animatedTitle=(direction=1)=>{
       Animated.timing(
@@ -31,7 +28,10 @@ class TweetDetail extends Component{
 
     componentDidMount() {
       this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-        this.props.navigation.navigate('Menu')
+        const { TweetDetailReducer: {
+          gotoScreen
+        }} = this.props;
+        this.props.navigation.navigate(gotoScreen)
         return true;
       });
     }
@@ -41,7 +41,10 @@ class TweetDetail extends Component{
     }
 
     onBack=()=>{
-      this.props.navigation.navigate('Menu')
+      const { TweetDetailReducer: {
+        gotoScreen
+      }} = this.props;
+      this.props.navigation.navigate(gotoScreen)
     }
 
     onlogout=()=>{
@@ -100,6 +103,7 @@ class TweetDetail extends Component{
                       {(tweet.video_url!=='')&&(<View style={styles.titleView}>
                         <Text style={styles.title}>{tweet.post_title}</Text>
                       </View>)}
+
                       <View style={styles.content}>
                         <Text style={styles.contentMatter}>{tweet.content}</Text>
                       </View>

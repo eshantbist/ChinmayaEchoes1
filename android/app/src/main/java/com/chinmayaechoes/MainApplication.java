@@ -3,6 +3,7 @@ package com.chinmayaechoes;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.dylanvann.fastimage.FastImageViewPackage;
 import com.amazonaws.RNAWSCognitoPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
@@ -30,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new FastImageViewPackage(),
             new RNAWSCognitoPackage(),
             new ReactVideoPackage(),
             new ReactNativeYouTube(),

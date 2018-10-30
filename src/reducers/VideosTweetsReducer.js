@@ -1,6 +1,7 @@
 const initialState = {
-  tweets: null,
   isVideo:false,
+  tweets: {},
+  tweetsAvailable:false,
 }
 
 const VideosTweetsReducer=(state=initialState,action)=>{
@@ -8,6 +9,7 @@ const VideosTweetsReducer=(state=initialState,action)=>{
     case 'VIDEOS_TWEETS':
     return {
       ...state,
+      tweetsAvailable:true,
       tweets: action.tweets,
       isVideo:true,
     }

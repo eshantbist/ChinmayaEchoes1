@@ -1,20 +1,31 @@
 import React,{Component} from 'react';
-import {Image,ScrollView,TouchableOpacity,Button,View,Text,FlatList,StyleSheet,Platform,Animated,Easing} from 'react-native';
+import {Linking,Image,ScrollView,TouchableOpacity,Button,View,Text,FlatList,StyleSheet,Platform,Animated,Easing} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FastImage from 'react-native-fast-image';
 
 export default class TweetItem extends Component{
-
     render() {
         const { tweet }=this.props;
+        let bottomMargin=7;
+        if(tweet.video_url===''){
+          bottomMargin=20;
+        }
         return(
           <TouchableOpacity key={tweet.id} onPress={this.props.onPress} style={styles.tweet}>
             <View style={styles.info}>
               {(tweet.video_url!=='')&&(<Text style={styles.title}>{tweet.post_title}</Text>)}
-              <Text style={styles.date}>{tweet.tweet_date}</Text>
-              <Image
-                    source={{uri:tweet.featured_image}}
-                    style={{height:300, width:'100%'}}
-                    resizeMode = 'stretch'/>
+              <Text style={[styles.date,{marginBottom:bottomMargin}]}>{tweet.tweet_date}</Text>
+              <TouchableOpacity style={styles.registerButton} onPress={() => Linking.openURL('http://www.chinmayamission.com')}>
+                <Text>Register</Text>
+              </TouchableOpacity>
+              <FastImage
+                style={{height:300, width:'100%'}}
+                source={{
+                  uri: tweet.featured_image,
+                  priority: FastImage.priority.normal,
+                }}
+                resizeMode={FastImage.resizeMode.stretch}
+              />
               <Text style={styles.content}>{tweet.content.slice(0,100)}</Text>
             </View>
             <View style={styles.readMore}>
@@ -55,7 +66,6 @@ const styles=StyleSheet.create({
       fontSize:12,
       fontWeight:'bold',
       color:'grey',
-      marginBottom:7,
   },
   readMore:{
       padding:10,
@@ -71,4 +81,16 @@ const styles=StyleSheet.create({
       fontFamily:Platform.OS === 'ios' ? 'cochin' : 'sans-serif-condensed',
       marginTop:10,
   },
+  registerButton:{
+    position:'absolute',
+    right:10,
+    top:10,
+    borderColor:'#bbb',
+    borderWidth:1,
+    padding:5,
+    borderRadius:10,
+    width:100,
+    alignItems:'center',
+    backgroundColor:'#f2f2f2'
+  }
 });

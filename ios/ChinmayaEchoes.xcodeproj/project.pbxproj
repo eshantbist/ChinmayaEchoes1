@@ -64,6 +64,7 @@
 		E9656333DC7249DEA2277F8F /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 309BCE74A4194A42AD30BA5A /* Entypo.ttf */; };
 		EC07376A21831C3E0036498F /* libRCTYouTube.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC07376321831C130036498F /* libRCTYouTube.a */; };
 		EC12068C21831DC600D5F817 /* YTPlayerView-iframe-player.html in Resources */ = {isa = PBXBuildFile; fileRef = EC12065E21831DC600D5F817 /* YTPlayerView-iframe-player.html */; };
+		EC3D4B6521883D2700680218 /* libFastImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC3D4B3821883D1700680218 /* libFastImage.a */; };
 		EC719C8921843C370020ED3C /* libRNAWSCognito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC719C8621843C1E0020ED3C /* libRNAWSCognito.a */; };
 		ECEB0FB82184804100B00B32 /* libRCTVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEB0FB52184802700B00B32 /* libRCTVideo.a */; };
 		FDB116B68332FC8CB744AD4C /* libPods-ChinmayaEchoes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1208AAFB6CC5193DF492465 /* libPods-ChinmayaEchoes.a */; };
@@ -392,6 +393,13 @@
 			remoteGlobalIDString = 8BDB9BC91B4289AE00EF9FEF;
 			remoteInfo = RCTYouTube;
 		};
+		EC3D4B3721883D1700680218 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC3D4B2F21883D1600680218 /* FastImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A287971D1DE0C0A60081BDFA;
+			remoteInfo = FastImage;
+		};
 		EC719C8521843C1E0020ED3C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EC719C5721843C1E0020ED3C /* RNAWSCognito.xcodeproj */;
@@ -478,6 +486,7 @@
 		EC07375E21831C120036498F /* RCTYouTube.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTYouTube.xcodeproj; path = "../node_modules/react-native-youtube/RCTYouTube.xcodeproj"; sourceTree = "<group>"; };
 		EC07376421831C170036498F /* RCTYouTube.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTYouTube.xcodeproj; path = "../node_modules/react-native-youtube/RCTYouTube.xcodeproj"; sourceTree = "<group>"; };
 		EC12065E21831DC600D5F817 /* YTPlayerView-iframe-player.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "YTPlayerView-iframe-player.html"; path = "../node_modules/react-native-youtube/assets/YTPlayerView-iframe-player.html"; sourceTree = "<group>"; };
+		EC3D4B2F21883D1600680218 /* FastImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FastImage.xcodeproj; path = "../node_modules/react-native-fast-image/ios/FastImage.xcodeproj"; sourceTree = "<group>"; };
 		EC719C5721843C1E0020ED3C /* RNAWSCognito.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNAWSCognito.xcodeproj; path = "../node_modules/amazon-cognito-identity-js/ios/RNAWSCognito.xcodeproj"; sourceTree = "<group>"; };
 		ECEB0FAF2184802600B00B32 /* RCTVideo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTVideo.xcodeproj; path = "../node_modules/react-native-video/ios/RCTVideo.xcodeproj"; sourceTree = "<group>"; };
 		F0E8C60CB9F04563BE2FBA49 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
@@ -500,6 +509,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC3D4B6521883D2700680218 /* libFastImage.a in Frameworks */,
 				ECEB0FB82184804100B00B32 /* libRCTVideo.a in Frameworks */,
 				EC719C8921843C370020ED3C /* libRNAWSCognito.a in Frameworks */,
 				EC07376A21831C3E0036498F /* libRCTYouTube.a in Frameworks */,
@@ -717,6 +727,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				EC3D4B2F21883D1600680218 /* FastImage.xcodeproj */,
 				ECEB0FAF2184802600B00B32 /* RCTVideo.xcodeproj */,
 				EC719C5721843C1E0020ED3C /* RNAWSCognito.xcodeproj */,
 				EC07376421831C170036498F /* RCTYouTube.xcodeproj */,
@@ -871,6 +882,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		EC3D4B3021883D1600680218 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC3D4B3821883D1700680218 /* libFastImage.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		EC719C5821843C1E0020ED3C /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1017,6 +1036,10 @@
 				{
 					ProductGroup = EC07374F21831BE10036498F /* Products */;
 					ProjectRef = C53D8F35160A4A9A927CD947 /* AppCenterReactNativeCrashes.xcodeproj */;
+				},
+				{
+					ProductGroup = EC3D4B3021883D1600680218 /* Products */;
+					ProjectRef = EC3D4B2F21883D1600680218 /* FastImage.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
@@ -1404,6 +1427,13 @@
 			fileType = archive.ar;
 			path = libRCTYouTube.a;
 			remoteRef = EC07376821831C170036498F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EC3D4B3821883D1700680218 /* libFastImage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libFastImage.a;
+			remoteRef = EC3D4B3721883D1700680218 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		EC719C8621843C1E0020ED3C /* libRNAWSCognito.a */ = {

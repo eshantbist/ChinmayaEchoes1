@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {TextInput,Image,Dimensions,TouchableHighlight,Text, View, StyleSheet,TouchableOpacity,Platform} from 'react-native';
+import {Alert,TextInput,Image,Dimensions,TouchableHighlight,Text, View, StyleSheet,TouchableOpacity,Platform} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Amplify, { Auth } from 'aws-amplify';
 import config from '../Utils/aws-exports';
@@ -31,6 +31,13 @@ class LogOutHeader extends Component{
   }
 
   debounceSearchAllTweets=debounce(this.props.searchAll,200);
+
+  getActiveRouteName =(routes)=>{
+    let last=this.props.navigation.state.routes[0].routes.length - 1;
+    let curentScreen =this.props.navigation.state.routes[0].routes[last].routeName;
+    Alert.alert(curentScreen);
+  }
+
   handleChange=(searchTerm)=>{
     this.setState({searchTerm},()=>{
       this.debounceSearchAllTweets(this.state.searchTerm,this.state.filter);
@@ -64,6 +71,7 @@ class LogOutHeader extends Component{
                       onChangeText={this.handleChange}
                   />
                 </View>
+                <TouchableOpacity onPress={()=>this.getActiveRouteName()}><Text>Screen</Text></TouchableOpacity>
               </View>
         </View>
       );

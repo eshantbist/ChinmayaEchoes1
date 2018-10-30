@@ -20,6 +20,8 @@ target 'ChinmayaEchoes' do
 
   pod 'RNAWSCognito', :path => '../node_modules/amazon-cognito-identity-js'
 
+  pod 'react-native-fast-image', :path => '../node_modules/react-native-fast-image'
+
   target 'ChinmayaEchoesTests' do
     inherit! :search_paths
     # Pods for testing

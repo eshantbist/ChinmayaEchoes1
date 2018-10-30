@@ -1,5 +1,6 @@
 const initialState = {
-  tweets: null,
+  tweets: {},
+  tweetsAvailable:false,
 }
 
 const QuotesTweetsReducer=(state=initialState,action)=>{
@@ -7,6 +8,7 @@ const QuotesTweetsReducer=(state=initialState,action)=>{
     case 'QUOTES_TWEETS':
     return {
       ...state,
+      tweetsAvailable:true,
       tweets: action.tweets,
     }
 

@@ -1,10 +1,11 @@
 import {POSTS_TWEETS,TWEET_DETAIL,QUOTES_TWEETS,VIDEOS_TWEETS,SHOW_OLD_USER_CONFIRMATION_MODAL,CONFIRM_FORGOT_PASSWORD,CONFIRM_USER,FORGOT_PASSWORD,SIGN_IN,SIGN_UP,ALL_TWEETS,SEARCH_TWEETS,LOG_OUT,LOG_IN,LOG_IN_SUCCESS,LOG_IN_FAILURE,SIGN_UP_SUCCESS,SIGN_UP_FAILURE,SHOW_SIGN_UP_CONFIRMATION_MODAL,CONFIRM_SIGNUP,CONFIRM_SIGNUP_SUCCESS,CONFIRM_SIGNUP_FAILURE,} from './actionTypes'
 import Amplify, { Auth } from 'aws-amplify';
 import config from '../Utils/aws-exports';
-import {Alert} from 'react-native';
+import {AsyncStorage,Alert} from 'react-native';
 Amplify.configure(config)
 import axios from 'axios';
 
+const uri='https://staging.chinmayamission.com/wp-json/gcmw/v1/tweet/search';
 function logIn() {
   return {
     type: LOG_IN
@@ -176,12 +177,13 @@ function confirmSignUpFailure(error) {
 
 export function fetchtweets(){
     return (dispatch) => {
-      const url = `https://staging.chinmayamission.com/wp-json/gcmw/v1/tweet/search`;
+      const url = `${uri}`;
+      let tweets;
       fetch(url)
          .then(response => {
-           response.json().
-           then(json => {
-             const tweets=json;
+           response.json()
+          .then(json => {
+             tweets=json;
              dispatch(alltweetlist(tweets))
            })
          })
@@ -192,13 +194,12 @@ export function fetchtweets(){
 export function videosFilter(){
     return (dispatch) => {
       const FILTER='Videos';
-      const url = `https://staging.chinmayamission.com/wp-json/gcmw/v1/tweet/search?category=${FILTER}`;
+      const url = `${uri}?category=${FILTER}`;
       fetch(url)
          .then(response => {
            response.json().
            then(json => {
              const tweets=json;
-             console.log(tweets);
              dispatch(videostweetlist(tweets))
            })
          })
@@ -209,7 +210,7 @@ export function videosFilter(){
 export function quotesFilter(){
     return (dispatch) => {
       const FILTER='Quotes';
-      const url = `https://staging.chinmayamission.com/wp-json/gcmw/v1/tweet/search?category=${FILTER}`;
+      const url = `${uri}?category=${FILTER}`;
       fetch(url)
          .then(response => {
            response.json().
@@ -225,7 +226,7 @@ export function quotesFilter(){
 export function postsFilter(){
     return (dispatch) => {
       const FILTER='Posts';
-      const url = `https://staging.chinmayamission.com/wp-json/gcmw/v1/tweet/search?category=${FILTER}`;
+      const url = `${uri}?category=${FILTER}`;
       fetch(url)
          .then(response => {
            response.json().
@@ -241,7 +242,7 @@ export function postsFilter(){
 export function searchAll(term){
     return (dispatch) => {
       const TERM=term;
-      const url = `https://staging.chinmayamission.com/wp-json/gcmw/v1/tweet/search?term=${TERM}`;
+      const url = `${uri}?term=${TERM}`;
       fetch(url)
          .then(response => {
            response.json().
@@ -340,9 +341,10 @@ export function closeSignUpModal() {
   }
 }
 
-export function tweetDetail(tweet){
+export function tweetDetail(tweet,gotoScreen){
   return{
     type:TWEET_DETAIL,
-    tweet:tweet
+    tweet:tweet,
+    gotoScreen:gotoScreen,
   }
 }

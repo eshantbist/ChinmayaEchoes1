@@ -16,7 +16,8 @@ const rootReducer= combineReducers({
   VideosTweetsReducer,
   ForgotPasswordReducer,
   TweetDetailReducer,
-  PostsTweetsReducer
+  PostsTweetsReducer,
+
 })
 
 export default rootReducer;
