@@ -6,7 +6,9 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import YouTube from 'react-native-youtube';
 import ResponsiveImage from 'react-native-responsive-image';
-import { ZoomableImage } from 'react-native-zoomable-image'
+import { ZoomableImage } from 'react-native-zoomable-image';
+import ImageZoom from 'react-native-image-pan-zoom';
+import FastImage from 'react-native-fast-image';
 
 
 const width=Dimensions.get('window').width;
@@ -34,6 +36,7 @@ class TweetDetail extends Component{
         this.props.navigation.navigate(gotoScreen)
         return true;
       });
+
     }
 
     componentWillUnmount() {
@@ -80,14 +83,29 @@ class TweetDetail extends Component{
                           resizeMode = 'stretch'
                           source={{uri:tweet.featured_image}}
                           style={styles.image}/>*/},
-                          <ZoomableImage
+                          {/*()<ZoomableImage
                             source={{
                               uri:tweet.featured_image,
                               width: width,
                               height: 400,
                             }}
                             resizeMode = 'stretch'
-                          />
+                          />*/},
+                          <ImageZoom cropWidth={width}
+                                   cropHeight={400}
+                                   imageWidth={width}
+                                   imageHeight={400}
+                                   style={{width:'100%'}}
+                                   >
+                             <FastImage
+                               style={{width:'100%', height:400}}
+                               source={{
+                                 uri: tweet.featured_image,
+                                 priority: FastImage.priority.normal,
+                               }}
+                               resizeMode={FastImage.resizeMode.stretch}
+                             />
+                        </ImageZoom>
                         ):
                         (<TouchableHighlight>
                             <YouTube

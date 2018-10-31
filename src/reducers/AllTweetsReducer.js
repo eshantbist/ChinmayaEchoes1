@@ -8,6 +8,7 @@ const initialState = {
 const TweetsReducer=(state=initialState,action)=>{
   switch (action.type) {
     case 'ALL_TWEETS':
+
     return {
       ...state,
       tweetsAvailable:true,

@@ -71,7 +71,6 @@ class LogOutHeader extends Component{
                       onChangeText={this.handleChange}
                   />
                 </View>
-                <TouchableOpacity onPress={()=>this.getActiveRouteName()}><Text>Screen</Text></TouchableOpacity>
               </View>
         </View>
       );

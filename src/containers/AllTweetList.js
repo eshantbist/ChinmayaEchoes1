@@ -9,7 +9,6 @@ import Amplify, { Auth } from 'aws-amplify';
 import config from '../Utils/aws-exports';
 import {logOut} from '../actions';
 import {fetchtweets,tweetDetail} from '../actions';
-import PinchZoomView from 'react-native-pinch-zoom-view';
 Amplify.configure(config)
 
 

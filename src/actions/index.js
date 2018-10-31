@@ -5,7 +5,7 @@ import {AsyncStorage,Alert} from 'react-native';
 Amplify.configure(config)
 import axios from 'axios';
 
-const uri='https://staging.chinmayamission.com/wp-json/gcmw/v1/tweet/search';
+const uri='https://echoes.staging.chinmayamission.com/wp-json/wp/v2/tweet/';
 function logIn() {
   return {
     type: LOG_IN
@@ -194,7 +194,7 @@ export function fetchtweets(){
 export function videosFilter(){
     return (dispatch) => {
       const FILTER='Videos';
-      const url = `${uri}?category=${FILTER}`;
+      const url = `${uri}?categories=3`;
       fetch(url)
          .then(response => {
            response.json().
@@ -210,7 +210,7 @@ export function videosFilter(){
 export function quotesFilter(){
     return (dispatch) => {
       const FILTER='Quotes';
-      const url = `${uri}?category=${FILTER}`;
+      const url = `${uri}?categories=2`;
       fetch(url)
          .then(response => {
            response.json().
@@ -226,7 +226,7 @@ export function quotesFilter(){
 export function postsFilter(){
     return (dispatch) => {
       const FILTER='Posts';
-      const url = `${uri}?category=${FILTER}`;
+      const url = `${uri}?categories=5`;
       fetch(url)
          .then(response => {
            response.json().
