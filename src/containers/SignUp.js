@@ -42,8 +42,11 @@ class SignUp extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { SignUpReducer: { showSignUpConfirmationModal }} = nextProps
+    const { SignUpReducer: { showSignUpConfirmationModal,showOldUserConfirmationModal }} = nextProps
     if (!showSignUpConfirmationModal && this.props.SignUpReducer.showSignUpConfirmationModal) {
+      this.setState(initialState)
+    }
+    if (!showOldUserConfirmationModal && this.props.SignUpReducer.showOldUserConfirmationModal) {
       this.setState(initialState)
     }
   }
@@ -77,6 +80,7 @@ class SignUp extends Component {
               <TextInput
                 placeholder='Username'
                 onChangeText={value => this.onChangeText('username',value)}
+                value={this.state.username}
                 style={styles.input}
               />
               <TouchableOpacity style={styles.starIcon} onPress={this.onUsernamePress}>
@@ -87,6 +91,7 @@ class SignUp extends Component {
               <TextInput
                 placeholder='Password'
                 onChangeText={value => this.onChangeText('password',value)}
+                value={this.state.password}
                 style={styles.input}
                 secureTextEntry={true}
               />
@@ -104,6 +109,7 @@ class SignUp extends Component {
             <TextInput
               placeholder='Email'
               onChangeText={value => this.onChangeText('email',value)}
+              value={this.state.email}
               style={styles.input}
             />
             <TouchableOpacity onPress={()=>this.signUp()} isLoading={isAuthenticating} style={styles.button} >

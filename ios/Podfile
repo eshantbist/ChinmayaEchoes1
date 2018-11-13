@@ -10,7 +10,7 @@ target 'ChinmayaEchoes' do
 
   # Pods for ChinmayaEchoes
 
-  
+  pod 'XCDYouTubeKit', '~> 2.5'
 
   platform :ios, '9.0'
 

@@ -1,7 +1,7 @@
 import {POSTS_TWEETS,TWEET_DETAIL,QUOTES_TWEETS,VIDEOS_TWEETS,SHOW_OLD_USER_CONFIRMATION_MODAL,CONFIRM_FORGOT_PASSWORD,CONFIRM_USER,FORGOT_PASSWORD,SIGN_IN,SIGN_UP,ALL_TWEETS,SEARCH_TWEETS,LOG_OUT,LOG_IN,LOG_IN_SUCCESS,LOG_IN_FAILURE,SIGN_UP_SUCCESS,SIGN_UP_FAILURE,SHOW_SIGN_UP_CONFIRMATION_MODAL,CONFIRM_SIGNUP,CONFIRM_SIGNUP_SUCCESS,CONFIRM_SIGNUP_FAILURE,} from './actionTypes'
 import Amplify, { Auth } from 'aws-amplify';
 import config from '../Utils/aws-exports';
-import {AsyncStorage,Alert} from 'react-native';
+import {Alert} from 'react-native';
 Amplify.configure(config)
 import axios from 'axios';
 
@@ -40,7 +40,6 @@ export function authenticate(username, password) {
         dispatch(logInSuccess(user))
       })
       .catch(err => {
-        Alert.alert(err.name || JSON.stringify(err));
         console.log('errror from signIn: ', err)
         dispatch(logInFailure(err))
       });
@@ -104,7 +103,6 @@ export function createUser(username, password, email, phone_number) {
                     })
                     .catch(err => {
                       console.log('error signing up: ', err)
-                      Alert.alert(err.name || JSON.stringify(err));
                       dispatch(signUpFailure(err))
                     });
             }
