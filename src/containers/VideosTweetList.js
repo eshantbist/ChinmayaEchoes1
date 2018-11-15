@@ -11,6 +11,7 @@ import {logOut} from '../actions';
 import {videosFilter,tweetDetail} from '../actions';
 Amplify.configure(config)
 
+const uri='http://echoes.staging.chinmayamission.com/wp-json/wp/v2/categories?slug=videos';
 
 class VideosTweetList extends Component{
 
@@ -49,7 +50,15 @@ class VideosTweetList extends Component{
         tweetsAvailable
       }} = this.props;
       if(tweetsAvailable===false){
-        this.props.videosFilter();
+        const url=`${uri}`;
+        fetch(url)
+           .then(response => {
+             response.json()
+            .then(json => {
+               json.map(category=>this.props.videosFilter(category.id))
+             })
+           })
+           .catch();
       }
       this.spinAnimation();
     }

@@ -10,8 +10,6 @@ import { ZoomableImage } from 'react-native-zoomable-image';
 import ImageZoom from 'react-native-image-pan-zoom';
 import FastImage from 'react-native-fast-image';
 
-
-const width=Dimensions.get('window').width;
 class TweetDetail extends Component{
 
     titleXPos=new Animated.Value(0);
@@ -68,6 +66,7 @@ class TweetDetail extends Component{
         } else {
             console.log("The youtube url is not valid.");
         }
+        const width=Dimensions.get('window').width;
         return(
             <View style={styles.mainContainer}>
               <ScrollView>
@@ -92,10 +91,11 @@ class TweetDetail extends Component{
                             resizeMode = 'stretch'
                           />*/},
                           <ImageZoom cropWidth={width}
+                                  resizeMode='stretch'
                                    cropHeight={400}
                                    imageWidth={width}
                                    imageHeight={400}
-                                   style={{width:'100%'}}
+                                   style={{flex:1,alignSelf: 'center',width:"100%"}}
                                    >
                              <FastImage
                                style={{width:'100%', height:400}}

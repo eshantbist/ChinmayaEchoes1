@@ -10,14 +10,15 @@ export default class TweetItem extends Component{
         if(tweet.video_url===''){
           bottomMargin=20;
         }
+        let url=tweet.register_url;
         return(
           <TouchableOpacity key={tweet.id} onPress={this.props.onPress} style={styles.tweet}>
             <View style={styles.info}>
               {(tweet.video_url!=='')&&(<Text style={styles.title}>{tweet.post_title}</Text>)}
               <Text style={[styles.date,{marginBottom:bottomMargin}]}>{tweet.tweet_date}</Text>
-              <TouchableOpacity style={styles.registerButton} onPress={() => Linking.openURL('http://www.chinmayamission.com')}>
+              {(tweet.register_url!=='')&&(<TouchableOpacity style={styles.registerButton} onPress={() => Linking.openURL(url)}>
                 <Text>Register</Text>
-              </TouchableOpacity>
+              </TouchableOpacity>)}
               <FastImage
                 style={{height:300, width:'100%'}}
                 source={{

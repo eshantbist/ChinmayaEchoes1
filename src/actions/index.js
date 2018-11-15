@@ -189,10 +189,9 @@ export function fetchtweets(){
     }
 }
 
-export function videosFilter(){
+export function videosFilter(id){
     return (dispatch) => {
-      const FILTER='Videos';
-      const url = `${uri}?categories=3`;
+      const url = `${uri}?categories=${id}`;
       fetch(url)
          .then(response => {
            response.json().
@@ -205,10 +204,9 @@ export function videosFilter(){
     }
 }
 
-export function quotesFilter(){
+export function quotesFilter(id){
     return (dispatch) => {
-      const FILTER='Quotes';
-      const url = `${uri}?categories=2`;
+      const url = `${uri}?categories=${id}`;
       fetch(url)
          .then(response => {
            response.json().
@@ -221,10 +219,9 @@ export function quotesFilter(){
     }
 }
 
-export function postsFilter(){
+export function postsFilter(id){
     return (dispatch) => {
-      const FILTER='Posts';
-      const url = `${uri}?categories=5`;
+      const url = `${uri}?categories=${id}`;
       fetch(url)
          .then(response => {
            response.json().
@@ -240,7 +237,7 @@ export function postsFilter(){
 export function searchAll(term){
     return (dispatch) => {
       const TERM=term;
-      const url = `${uri}?term=${TERM}`;
+      const url = `${uri}?search=${TERM}`;
       fetch(url)
          .then(response => {
            response.json().

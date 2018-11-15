@@ -98,7 +98,7 @@ class AllTweetList extends Component{
       });
 
       if(tweetsAvailable===true)
-      { console.log('Inside tweets');
+      { 
         return(
           <View style={styles.scrollContainer}>
               <FlatList

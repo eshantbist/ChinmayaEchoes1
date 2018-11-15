@@ -46,9 +46,6 @@ class SignUp extends Component {
     if (!showSignUpConfirmationModal && this.props.SignUpReducer.showSignUpConfirmationModal) {
       this.setState(initialState)
     }
-    if (!showOldUserConfirmationModal && this.props.SignUpReducer.showOldUserConfirmationModal) {
-      this.setState(initialState)
-    }
   }
 
 

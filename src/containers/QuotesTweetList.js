@@ -11,6 +11,7 @@ import {logOut} from '../actions';
 import {quotesFilter,tweetDetail} from '../actions';
 Amplify.configure(config)
 
+const uri='http://echoes.staging.chinmayamission.com/wp-json/wp/v2/categories?slug=quotes';
 
 class QuotesTweetList extends Component{
 
@@ -49,7 +50,15 @@ class QuotesTweetList extends Component{
         tweetsAvailable
       }} = this.props;
       if(tweetsAvailable===false){
-        this.props.quotesFilter();
+        const url=`${uri}`;
+        fetch(url)
+           .then(response => {
+             response.json()
+            .then(json => {
+               json.map(category=>this.props.quotesFilter(category.id))
+             })
+           })
+           .catch();
       }
       this.spinAnimation();
     }

@@ -32,12 +32,6 @@ class LogOutHeader extends Component{
 
   debounceSearchAllTweets=debounce(this.props.searchAll,200);
 
-  getActiveRouteName =(routes)=>{
-    let last=this.props.navigation.state.routes[0].routes.length - 1;
-    let curentScreen =this.props.navigation.state.routes[0].routes[last].routeName;
-    Alert.alert(curentScreen);
-  }
-
   handleChange=(searchTerm)=>{
     this.setState({searchTerm},()=>{
       this.debounceSearchAllTweets(this.state.searchTerm,this.state.filter);
@@ -133,7 +127,7 @@ const styles = StyleSheet.create({
   searchIcon:{
     marginHorizontal:5,
     fontSize:25,
-    color:'black'
+    color:'black',
   },
   input:{
     fontFamily:"Times New Roman",
