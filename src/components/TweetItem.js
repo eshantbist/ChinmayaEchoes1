@@ -10,6 +10,7 @@ export default class TweetItem extends Component{
         if(tweet.video_url===''){
           bottomMargin=20;
         }
+        const content = tweet.content.replace(/<[^>]*>/gm,'');
         let url=tweet.register_url;
         return(
           <TouchableOpacity key={tweet.id} onPress={this.props.onPress} style={styles.tweet}>
@@ -27,7 +28,7 @@ export default class TweetItem extends Component{
                 }}
                 resizeMode={FastImage.resizeMode.stretch}
               />
-              <Text style={styles.content}>{tweet.content.slice(0,100)}</Text>
+              <Text style={styles.content}>{content.slice(0,100)}</Text>
             </View>
             <View style={styles.readMore}>
                 <Text style={{color:'#999999'}} >Read More...</Text>

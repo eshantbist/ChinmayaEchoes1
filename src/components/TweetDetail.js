@@ -60,6 +60,8 @@ class TweetDetail extends Component{
           isVideo
         }} = this.props;
         const url=tweet.video_url
+
+        const content = tweet.content.replace(/<[^>]*>/gm,'');
         const videoId = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
         if(videoId != null) {
            console.log(videoId[1]);
@@ -123,7 +125,7 @@ class TweetDetail extends Component{
                       </View>)}
 
                       <View style={styles.content}>
-                        <Text style={styles.contentMatter}>{tweet.content}</Text>
+                        <Text style={styles.contentMatter}>{content}</Text>
                       </View>
                     </View>
               </ScrollView>

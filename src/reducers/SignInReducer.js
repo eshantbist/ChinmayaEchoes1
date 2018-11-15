@@ -3,6 +3,7 @@ const initialState = {
   user: {},
   signInError: false,
   signInErrorMessage: '',
+  showLoadingModel:false,
 }
 
 const SignInReducer=(state = initialState, action) => {
@@ -11,12 +12,14 @@ const SignInReducer=(state = initialState, action) => {
       return {
         ...state,
         isAuthenticating: true,
-        signInError: false
+        signInError: false,
+        showLoadingModel:true,
       }
     case 'LOG_IN_SUCCESS':
       return {
         isAuthenticating: false,
         user: action.user,
+        showLoadingModel:false,
       }
     case 'LOG_IN_FAILURE':
       console.log('failed')
@@ -24,7 +27,8 @@ const SignInReducer=(state = initialState, action) => {
         ...state,
         isAuthenticating: false,
         signInError: true,
-        signInErrorMessage: action.error.message
+        signInErrorMessage: action.error.message,
+        showLoadingModel:false,
       }
     case 'LOG_OUT':
       return {

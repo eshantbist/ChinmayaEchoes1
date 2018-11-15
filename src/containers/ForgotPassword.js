@@ -80,7 +80,6 @@ class ForgotPassword extends Component {
                 />
                 <TextInput
                   placeholder="New Password"
-                  keyboardType='numeric'
                   onChangeText={value => this.onChangeText('new_password',value)}
                   value={this.state.new_password}
                   style={styles.modalInput}

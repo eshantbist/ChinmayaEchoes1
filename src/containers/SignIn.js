@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Alert,Dimensions,ScrollView,Modal,TouchableOpacity,Button,TextInput,Platform, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView,Animated,Alert,Dimensions,ScrollView,Modal,TouchableOpacity,Button,TextInput,Platform, StyleSheet, Text, View} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {authenticate,onForgotPasswordClick} from '../actions';
 import {connect} from 'react-redux';
@@ -17,6 +17,25 @@ class SignIn extends Component {
     username:'',
     password:'',
     user:{},
+  }
+
+  loadingSpin=new Animated.Value(0);
+
+  spinAnimation(){
+    this.loadingSpin.setValue(0);
+    Animated.sequence([
+      Animated.timing(
+        this.loadingSpin,
+        {
+          toValue:1,
+          duration:380,
+        }
+      )
+    ]).start(()=>this.spinAnimation());
+  }
+
+  componentDidMount(){
+    this.spinAnimation();
   }
   onChangeText(key,value) {
     this.setState({ [key]:value })
@@ -36,11 +55,15 @@ class SignIn extends Component {
   }
 
   render() {
+    const spin=this.loadingSpin.interpolate({
+        inputRange:[0,1],
+        outputRange:['0deg','360deg']
+    });
     const { SignInReducer: {
       signInErrorMessage,
       isAuthenticating,
       signInError,
-      showSignInConfirmationModal
+      showLoadingModel,
     }} = this.props
     const { username, password } = this.state
     return (
@@ -68,6 +91,15 @@ class SignIn extends Component {
                 <Text style={{fontWeight:'900',fontSize:16,color:'white'}}>Forgot Password??</Text>
               </TouchableOpacity>
             </View>
+            {
+              showLoadingModel && (
+                <Modal transparent={true}>
+                  <SafeAreaView style={styles.modal}>
+                  <Animated.Image style={{transform: [{rotate:spin}],height:80,width:80}} source={require('../Image/circle.png')} />
+                  </SafeAreaView>
+                </Modal>
+              )
+            }
         </ScrollView>
       </View>
     );
@@ -114,6 +146,14 @@ const styles = StyleSheet.create(
       borderRadius:6,
       marginHorizontal:100,
       marginVertical:10,
+    },
+    modal:{
+      flex:1,
+      flexDirection:'row',
+      justifyContent:'center',
+      alignItems:'center',
+      marginHorizontal:120,
+      marginVertical:350,
     }
   },
 );

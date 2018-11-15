@@ -7,6 +7,7 @@ import QuotesTweetsReducer from './QuotesTweetsReducer';
 import ForgotPasswordReducer from './ForgotPasswordReducer';
 import TweetDetailReducer from './TweetDetailReducer';
 import PostsTweetsReducer from './PostsTweetsReducer';
+import EventsTweetsReducer from './EventsTweetsReducer';
 
 const rootReducer= combineReducers({
   SignInReducer,
@@ -17,7 +18,7 @@ const rootReducer= combineReducers({
   ForgotPasswordReducer,
   TweetDetailReducer,
   PostsTweetsReducer,
-
+  EventsTweetsReducer,
 })
 
 export default rootReducer;

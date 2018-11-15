@@ -1,4 +1,4 @@
-import {POSTS_TWEETS,TWEET_DETAIL,QUOTES_TWEETS,VIDEOS_TWEETS,SHOW_OLD_USER_CONFIRMATION_MODAL,CONFIRM_FORGOT_PASSWORD,CONFIRM_USER,FORGOT_PASSWORD,SIGN_IN,SIGN_UP,ALL_TWEETS,SEARCH_TWEETS,LOG_OUT,LOG_IN,LOG_IN_SUCCESS,LOG_IN_FAILURE,SIGN_UP_SUCCESS,SIGN_UP_FAILURE,SHOW_SIGN_UP_CONFIRMATION_MODAL,CONFIRM_SIGNUP,CONFIRM_SIGNUP_SUCCESS,CONFIRM_SIGNUP_FAILURE,} from './actionTypes'
+import {EVENTS_TWEETS,POSTS_TWEETS,TWEET_DETAIL,QUOTES_TWEETS,VIDEOS_TWEETS,SHOW_OLD_USER_CONFIRMATION_MODAL,CONFIRM_FORGOT_PASSWORD,CONFIRM_USER,FORGOT_PASSWORD,SIGN_IN,SIGN_UP,ALL_TWEETS,SEARCH_TWEETS,LOG_OUT,LOG_IN,LOG_IN_SUCCESS,LOG_IN_FAILURE,SIGN_UP_SUCCESS,SIGN_UP_FAILURE,SHOW_SIGN_UP_CONFIRMATION_MODAL,CONFIRM_SIGNUP,CONFIRM_SIGNUP_SUCCESS,CONFIRM_SIGNUP_FAILURE,} from './actionTypes'
 import Amplify, { Auth } from 'aws-amplify';
 import config from '../Utils/aws-exports';
 import {Alert} from 'react-native';
@@ -6,6 +6,9 @@ Amplify.configure(config)
 import axios from 'axios';
 
 const uri='https://echoes.staging.chinmayamission.com/wp-json/wp/v2/tweet/';
+const quotes_uri='http://echoes.staging.chinmayamission.com/wp-json/wp/v2/categories?slug=quotes';
+const posts_uri='http://echoes.staging.chinmayamission.com/wp-json/wp/v2/categories?slug=posts';
+const events_uri='http://echoes.staging.chinmayamission.com/wp-json/wp/v2/categories?slug=events';
 function logIn() {
   return {
     type: LOG_IN
@@ -234,10 +237,28 @@ export function postsFilter(id){
     }
 }
 
+export function eventsFilter(id){
+    return (dispatch) => {
+      const url = `${uri}?categories=${id}`;
+      fetch(url)
+         .then(response => {
+           response.json().
+           then(json => {
+             const tweets=json;
+             dispatch(eventstweetlist(tweets))
+           })
+         })
+         .catch();
+    }
+}
+
 export function searchAll(term){
     return (dispatch) => {
       const TERM=term;
       const url = `${uri}?search=${TERM}`;
+      dispatch(searchQuotes(term))
+      dispatch(searchPosts(term))
+      dispatch(searchEvents(term))
       fetch(url)
          .then(response => {
            response.json().
@@ -248,6 +269,90 @@ export function searchAll(term){
          })
          .catch();
     }
+}
+
+export function searchQuotes(term){
+    return (dispatch) => {
+      const category_url=`${quotes_uri}`;
+      fetch(category_url)
+         .then(response => {
+           response.json()
+          .then(json => {
+             json.map(category=>{
+               const id=category.id;
+               const TERM=term;
+               const url = `${uri}?categories=${id}&search=${TERM}`;
+               fetch(url)
+                  .then(response => {
+                    response.json().
+                    then(json => {
+                      const tweets=json;
+                      dispatch(quotestweetlist(tweets))
+                    })
+                  })
+                  .catch();
+
+             })
+           })
+         })
+         .catch();
+    }
+}
+
+export function searchPosts(term){
+  return (dispatch) => {
+    const category_url=`${posts_uri}`;
+    fetch(category_url)
+       .then(response => {
+         response.json()
+        .then(json => {
+           json.map(category=>{
+             const id=category.id;
+             const TERM=term;
+             const url = `${uri}?categories=${id}&search=${TERM}`;
+             fetch(url)
+                .then(response => {
+                  response.json().
+                  then(json => {
+                    const tweets=json;
+                    dispatch(poststweetlist(tweets))
+                  })
+                })
+                .catch();
+
+           })
+         })
+       })
+       .catch();
+  }
+}
+
+export function searchEvents(term){
+  return (dispatch) => {
+    const category_url=`${events_uri}`;
+    fetch(category_url)
+       .then(response => {
+         response.json()
+        .then(json => {
+           json.map(category=>{
+             const id=category.id;
+             const TERM=term;
+             const url = `${uri}?categories=${id}&search=${TERM}`;
+             fetch(url)
+                .then(response => {
+                  response.json().
+                  then(json => {
+                    const tweets=json;
+                    dispatch(eventstweetlist(tweets))
+                  })
+                })
+                .catch();
+
+           })
+         })
+       })
+       .catch();
+  }
 }
 
 function alltweetlist(tweets){
@@ -274,6 +379,13 @@ function quotestweetlist(tweets){
 function poststweetlist(tweets){
   return{
     type:POSTS_TWEETS,
+    tweets
+  };
+}
+
+function eventstweetlist(tweets){
+  return{
+    type:EVENTS_TWEETS,
     tweets
   };
 }

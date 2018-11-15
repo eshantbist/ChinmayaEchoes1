@@ -6,6 +6,7 @@ import AllTweetList from '../containers/AllTweetList';
 import QuotesTweetList from '../containers/QuotesTweetList';
 import VideosTweetList from '../containers/VideosTweetList';
 import PostsTweetList from '../containers/PostsTweetList';
+import EventsTweetList from '../containers/EventsTweetList';
 import TweetDetail from '../components/TweetDetail';
 
 const AppStackNav = createStackNavigator({
@@ -20,14 +21,14 @@ const AppStackNav = createStackNavigator({
 
 const MenuStackNav = createMaterialTopTabNavigator({
     All: { screen: AllTweetList },
-    Videos: { screen: VideosTweetList },
     Quotes: { screen: QuotesTweetList },
     Posts: { screen: PostsTweetList },
+    Events: { screen: EventsTweetList },
   },
 {
   tabBarOptions: {
     labelStyle: {
-      fontSize:10,
+      fontSize:9,
       fontWeight:'900',
     },
     style: {
