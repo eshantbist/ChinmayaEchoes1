@@ -50,13 +50,17 @@ class SignUp extends Component {
 
 
   onPasswordPress=()=>{
-    var err='Minimum length of password should be 8.It should contain at atleast one Uppercase and one LowerCase.It should also contain atleast one special character and one number';
-    Alert.alert(JSON.stringify(err));
+    Alert.alert(
+      '',
+      'Minimum length of password should be 8.It should contain at atleast one Uppercase and one LowerCase.It should also contain atleast one special character and one number',
+    )
   }
 
   onUsernamePress=()=>{
-    var err='There should be no space in Username';
-    Alert.alert(JSON.stringify(err));
+    Alert.alert(
+      '',
+      'There should be no space in Username',
+    )
   }
 
   render() {

@@ -4,7 +4,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import LogOutHeader from '../containers/LogOutHeader';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import YouTube from 'react-native-youtube';
+// import YouTube from 'react-native-youtube';
 import ResponsiveImage from 'react-native-responsive-image';
 import { ZoomableImage } from 'react-native-zoomable-image';
 import ImageZoom from 'react-native-image-pan-zoom';
@@ -79,54 +79,16 @@ class TweetDetail extends Component{
                   </Text>
                 </TouchableOpacity>
                     <View>
-                      {videoId===null?
-                        ({/*<Image
-                          resizeMode = 'stretch'
-                          source={{uri:tweet.featured_image}}
-                          style={styles.image}/>*/},
-                          {/*()<ZoomableImage
-                            source={{
-                              uri:tweet.featured_image,
-                              width: width,
-                              height: 400,
-                            }}
-                            resizeMode = 'stretch'
-                          />*/},
-                          <ImageZoom cropWidth={width}
-                                  resizeMode='stretch'
-                                   cropHeight={400}
-                                   imageWidth={width}
-                                   imageHeight={400}
-                                   style={{flex:1,alignSelf: 'center',width:"100%"}}
-                                   >
-                             <FastImage
-                               style={{width:'100%', height:400}}
-                               source={{
-                                 uri: tweet.featured_image,
-                                 priority: FastImage.priority.normal,
-                               }}
-                               resizeMode={FastImage.resizeMode.stretch}
-                             />
-                        </ImageZoom>
-                        ):
-                        (<TouchableHighlight>
-                            <YouTube
-                            videoId={videoId[1]}
-                            apiKey='AIzaSyBVzrXQ6_qUDtb4SCBgHdirtZbzybwSRjs'
-                            play={true}
-                            fullscreen={false}
-                            loop={true}
-                            style={{ justifyContent:'center',alignSelf: 'stretch', height: 300 }}
-                            />
-                        </TouchableHighlight>)}
 
-                      {(tweet.video_url!=='')&&(<View style={styles.titleView}>
-                        <Text style={styles.title}>{tweet.post_title}</Text>
-                      </View>)}
+                        {(tweet.video_url!=='')&&(
+                          <View style={styles.titleView}>
+                            <Text style={styles.title}>{tweet.post_title}</Text>
+                          </View>
+                        )}
 
-                      <View style={styles.content}>
-                        <Text style={styles.contentMatter}>{content}</Text>
-                      </View>
+                        <View style={styles.content}>
+                          <Text style={styles.contentMatter}>{content}</Text>
+                        </View>
                     </View>
               </ScrollView>
             </View>

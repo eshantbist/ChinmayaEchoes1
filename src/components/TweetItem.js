@@ -1,15 +1,22 @@
 import React,{Component} from 'react';
-import {Linking,Image,ScrollView,TouchableOpacity,Button,View,Text,FlatList,StyleSheet,Platform,Animated,Easing} from 'react-native';
+import {Dimensions,SafeAreaView,Modal,Linking,Image,ScrollView,TouchableOpacity,Button,View,Text,FlatList,StyleSheet,Platform,Animated,Easing} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FastImage from 'react-native-fast-image';
+import ImageZoom from 'react-native-image-pan-zoom';
+import {connect} from 'react-redux';
 
-export default class TweetItem extends Component{
+class TweetItem extends Component{
+    state = {
+      modalVisibility:false,
+    }
     render() {
+        const width=Dimensions.get('window').width;
         const { tweet }=this.props;
         let bottomMargin=7;
         if(tweet.video_url===''){
           bottomMargin=20;
         }
+
         const content = tweet.content.replace(/<[^>]*>/gm,'');
         let url=tweet.register_url;
         return(
@@ -20,14 +27,16 @@ export default class TweetItem extends Component{
               {(tweet.register_url!=='')&&(<TouchableOpacity style={styles.registerButton} onPress={() => Linking.openURL(url)}>
                 <Text>Register</Text>
               </TouchableOpacity>)}
-              <FastImage
-                style={{height:300, width:'100%'}}
-                source={{
-                  uri: tweet.featured_image,
-                  priority: FastImage.priority.normal,
-                }}
-                resizeMode={FastImage.resizeMode.stretch}
-              />
+              <TouchableOpacity onPress={this.props.onImagePress}>
+                <FastImage
+                  style={{height:300, width:'100%'}}
+                  source={{
+                    uri: tweet.featured_image,
+                    priority: FastImage.priority.normal,
+                  }}
+                  resizeMode={FastImage.resizeMode.cover}
+                />
+              </TouchableOpacity>
               <Text style={styles.content}>{content.slice(0,100)}</Text>
             </View>
             <View style={styles.readMore}>
@@ -37,6 +46,12 @@ export default class TweetItem extends Component{
         );
     }
 }
+
+const mapStateToProps=(state)=>{
+  return{AllTweetsReducer: state.AllTweetsReducer}
+}
+
+export default connect(mapStateToProps)(TweetItem);
 
 
 const styles=StyleSheet.create({
@@ -94,5 +109,12 @@ const styles=StyleSheet.create({
     width:100,
     alignItems:'center',
     backgroundColor:'#f2f2f2'
+  },
+  modal:{
+    flex:1,
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems:'center',
+    backgroundColor:'white'
   }
 });

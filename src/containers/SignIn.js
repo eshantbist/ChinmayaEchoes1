@@ -54,6 +54,9 @@ class SignIn extends Component {
       this.props.onForgotPasswordClick()
   }
 
+  closemodal=()=>{
+    console.log('modal closed');
+  }
   render() {
     const spin=this.loadingSpin.interpolate({
         inputRange:[0,1],
@@ -93,7 +96,7 @@ class SignIn extends Component {
             </View>
             {
               showLoadingModel && (
-                <Modal transparent={true}>
+                <Modal onRequestClose={()=>this.closemodal()}  transparent={true} >
                   <SafeAreaView style={styles.modal}>
                   <Animated.Image style={{transform: [{rotate:spin}],height:80,width:80}} source={require('../Image/circle.png')} />
                   </SafeAreaView>
