@@ -7,7 +7,7 @@ export default class Header extends Component{
   render(){
     return(
       <View style={styles.heading}>
-          <Image source={require('../Image/logo.png')} style={styles.logo} />
+          <Image source={require('../Image/log.png')} style={styles.logo} />
           {/*<FontAwesome name={'home'} style={styles.homeIcon}/>
           <Text style={styles.headingText}>
             Chinmaya Echoes
@@ -25,19 +25,8 @@ const styles = StyleSheet.create({
     backgroundColor:'#e6e6e6',
     padding:10,
   },
-  homeIcon:{
-    fontSize:25,
-    color:'black',
-    marginRight:10,
-  },
-  headingText:{
-    fontSize:20,
-    fontWeight:'800',
-    color:'black',
-    fontFamily:Platform.OS === 'ios' ? 'cochin' : 'monospace'
-  },
   logo:{
     height:30,
-    width:100,
+    width:120,
   },
 });

@@ -71,7 +71,7 @@ class LogOutHeader extends Component{
     }
     return(
       <View style={styles.headerContainer}>
-            <Image source={require('../Image/logo.png')} style={styles.logo} />
+            <Image source={require('../Image/log.png')} style={styles.logo} />
             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
               <TouchableOpacity onPress={()=>this.logout()} style={styles.goBack}>
                 <Text style={styles.logout}>
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   },
   logo:{
     height:30,
-    width:100,
+    width:120,
   },
   logout:{
     marginVertical:5,

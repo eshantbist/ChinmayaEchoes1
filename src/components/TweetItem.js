@@ -10,13 +10,11 @@ class TweetItem extends Component{
       modalVisibility:false,
     }
     render() {
-        const width=Dimensions.get('window').width;
         const { tweet }=this.props;
         let bottomMargin=7;
         if(tweet.video_url===''){
           bottomMargin=20;
         }
-
         const content = tweet.content.replace(/<[^>]*>/gm,'');
         let url=tweet.register_url;
         return(
