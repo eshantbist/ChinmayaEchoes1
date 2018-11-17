@@ -12,7 +12,7 @@ const StackNav = createMaterialBottomTabNavigator(
       navigationOptions:{
         tabBarLabel:'Sign In',
         tabBarIcon:({tintColor})=>(
-           <FontAwesome name={'sign-in'} color={'white'} size={22}/>
+           <FontAwesome name={'sign-in'} color={tintColor} size={22}/>
         )
       }
     },
@@ -21,7 +21,7 @@ const StackNav = createMaterialBottomTabNavigator(
       navigationOptions:{
         tabBarLabel:'Register',
         tabBarIcon:({tintColor})=>(
-           <FontAwesome name={'user-plus'} color={'white'} size={22}/>
+           <FontAwesome name={'user-plus'} color={tintColor} size={22}/>
         )
       }
     },
@@ -29,6 +29,8 @@ const StackNav = createMaterialBottomTabNavigator(
   {
     initialRouteName:'SignIn',
     activeTintColor:'white',
+    inactiveTintColor:'black',
+    shifting:'true',
   }
 );
 

@@ -32,12 +32,14 @@ class SignUp extends Component {
     {
       Alert.alert('Fill all fields')
     }
-    this.props.createUser(username,password,email,phone_number)
+    lowerCaseUsername=username.toLowerCase();
+    this.props.createUser(lowerCaseUsername,password,email,phone_number)
   }
 
   confirm=()=> {
-    const { authCode, username } = this.state
-    this.props.confirmUserSignUp(username, authCode);
+    const { authCode, username } = this.state;
+    lowerCaseUsername=username.toLowerCase();
+    this.props.confirmUserSignUp(lowerCaseUsername, authCode);
     this.props.navigation.navigate('SignIn')
   }
 

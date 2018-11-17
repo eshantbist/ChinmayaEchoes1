@@ -47,7 +47,8 @@ class SignIn extends Component {
     {
       Alert.alert('Fill all fields')
     }
-    this.props.authenticate(username, password)
+    lowerCaseUsername=username.toLowerCase();
+    this.props.authenticate(lowerCaseUsername, password)
   }
 
   forgotPassword=()=>{

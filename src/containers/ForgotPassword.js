@@ -30,11 +30,13 @@ class ForgotPassword extends Component {
 
   confirm=()=>{
     const { username,authCode,new_password } = this.state
-    this.props.confirmForgotPassword(username,authCode,new_password);
+    lowerCaseUsername=username.toLowerCase();
+    this.props.confirmForgotPassword(lowerCaseUsername,authCode,new_password);
   }
 
   showVerify=()=>{
-    this.props.userForgotPassword(this.state.username)
+    lowerCaseUsername=this.state.username.toLowerCase();
+    this.props.userForgotPassword(lowerCaseUsername)
   }
 
   onBack=()=>{

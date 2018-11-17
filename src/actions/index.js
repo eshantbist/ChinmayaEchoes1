@@ -78,7 +78,7 @@ export function createUser(username, password, email, phone_number) {
     if (firstTwoDigits === '+1') {
       phone = phone_number
     } else {
-      phone = '+1' + phone_number
+      phone = '+91' + phone_number
     }
 
     Auth.signIn( username, password )
