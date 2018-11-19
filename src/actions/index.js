@@ -2,13 +2,14 @@ import {CLOSE_TWEETS_READMORE,SHOW_READ_MORE,CLOSE_TWEETS_IMAGE,ALL_TWEETS_IMAGE
 import Amplify, { Auth } from 'aws-amplify';
 import config from '../Utils/aws-exports';
 import {Alert} from 'react-native';
+import {categoryUri} from '../Utils/UrlList'
+import {uri} from '../Utils/UrlList'
 Amplify.configure(config)
 import axios from 'axios';
 
-const uri='https://echoes.staging.chinmayamission.com/wp-json/wp/v2/tweet/';
-const quotes_uri='http://echoes.staging.chinmayamission.com/wp-json/wp/v2/categories?slug=quotes';
-const posts_uri='http://echoes.staging.chinmayamission.com/wp-json/wp/v2/categories?slug=posts';
-const events_uri='http://echoes.staging.chinmayamission.com/wp-json/wp/v2/categories?slug=events';
+const quotes_uri=categoryUri+'quotes';
+const posts_uri=categoryUri+'posts';
+const events_uri=categoryUri+'events';
 function logIn() {
   return {
     type: LOG_IN

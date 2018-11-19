@@ -9,9 +9,10 @@ import Amplify, { Auth } from 'aws-amplify';
 import config from '../Utils/aws-exports';
 import {imageModal,closeReadMoreModal,showReadMoreModal,closeImageModal,logOut} from '../actions';
 import {postsFilter,tweetDetail} from '../actions';
+import {categoryUri} from '../Utils/UrlList'
 Amplify.configure(config)
 
-const uri='http://echoes.staging.chinmayamission.com/wp-json/wp/v2/categories?slug=posts';
+const uri=categoryUri+'posts';
 
 class PostsTweetList extends Component{
 
