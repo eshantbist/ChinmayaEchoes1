@@ -102,7 +102,7 @@ class EventsTweetList extends Component{
     render() {
       const width=Dimensions.get('window').width;
       const { EventsTweetsReducer: {
-        tweets,tweetsAvailable,imageModalVisibility,image,readMoreModalVisibility,tweet
+        tweets,tweetsAvailable,imageModalVisibility,image,readMoreModalVisibility,tweet,emptyEventsData
       }} = this.props;
 
       const spin=this.loadingSpin.interpolate({
@@ -110,10 +110,15 @@ class EventsTweetList extends Component{
           outputRange:['0deg','360deg']
       });
 
+      if(emptyEventsData===true)
+      {
+        return(
+          <View style={{flex:1,justifyContent:'center',alignItems:'center'}}><Text style={{fontSize:20}}>NO MATCHING RECORDS FOUND...</Text></View>
+        );
+      }
       if(tweetsAvailable===true)
       {
         imageUrl=image;
-        console.log(imageUrl)
         return(
           <View style={styles.scrollContainer}>
               <FlatList

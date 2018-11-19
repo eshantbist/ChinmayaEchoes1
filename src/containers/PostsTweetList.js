@@ -101,16 +101,22 @@ class PostsTweetList extends Component{
     render() {
       const width=Dimensions.get('window').width;
       const { PostsTweetsReducer: {
-        tweets,tweetsAvailable,imageModalVisibility,image,readMoreModalVisibility,tweet
+        tweets,tweetsAvailable,imageModalVisibility,image,readMoreModalVisibility,tweet,emptyPostsData
       }} = this.props;
       const spin=this.loadingSpin.interpolate({
           inputRange:[0,1],
           outputRange:['0deg','360deg']
       });
+
+      if(emptyPostsData===true)
+      {
+        return(
+          <View style={{flex:1,justifyContent:'center',alignItems:'center'}}><Text style={{fontSize:20}}>NO MATCHING RECORDS FOUND...</Text></View>
+        );
+      }
       if(tweetsAvailable===true)
       {
         imageUrl=image;
-        console.log(imageUrl)
         return(
           <View style={styles.scrollContainer}>
               <FlatList

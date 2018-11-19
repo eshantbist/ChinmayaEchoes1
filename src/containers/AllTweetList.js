@@ -99,18 +99,23 @@ class AllTweetList extends Component{
     render() {
       const width=Dimensions.get('window').width;
       const { AllTweetsReducer: {
-        tweets,tweetsAvailable,imageModalVisibility,image,readMoreModalVisibility,tweet
+        tweets,tweetsAvailable,imageModalVisibility,image,readMoreModalVisibility,tweet,emptyAllData
       }} = this.props;
 
       const spin=this.loadingSpin.interpolate({
           inputRange:[0,1],
           outputRange:['0deg','360deg']
       });
-      console.log(tweet.content);
+
+      if(emptyAllData===true)
+      {
+        return(
+          <View style={{flex:1,justifyContent:'center',alignItems:'center'}}><Text style={{fontSize:20}}>NO MATCHING RECORDS FOUND...</Text></View>
+        );
+      }
       if(tweetsAvailable===true)
       {
         imageUrl=image;
-        console.log(imageUrl)
         return(
           <View style={styles.scrollContainer}>
               <FlatList

@@ -1,6 +1,6 @@
 import React from 'react'
 import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs';
-import { SafeAreaView,Text, View} from 'react-native';
+import {SafeAreaView,Text,View} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import SignIn from '../containers/SignIn';
 import SignUp from '../containers/SignUp';

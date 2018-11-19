@@ -6,7 +6,8 @@ const initialState = {
   imageModalVisibility:false,
   readMoreModalVisibility:false,
   image:null,
-  tweet:{}
+  tweet:{},
+  emptyAllData:false,
 }
 
 const TweetsReducer=(state=initialState,action)=>{
@@ -16,6 +17,7 @@ const TweetsReducer=(state=initialState,action)=>{
     return {
       ...state,
       tweetsAvailable:true,
+      emptyAllData:false,
       tweets: action.tweets,
     }
     case 'ALL_TWEETS_IMAGE':
@@ -43,6 +45,11 @@ const TweetsReducer=(state=initialState,action)=>{
     return {
       ...state,
       readMoreModalVisibility:false,
+    }
+    case 'EMPTY_ALL_MESSAGE':
+    return {
+      ...state,
+      emptyAllData:true,
     }
 
     default:

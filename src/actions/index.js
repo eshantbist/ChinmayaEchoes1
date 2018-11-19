@@ -1,4 +1,4 @@
-import {CLOSE_TWEETS_READMORE,SHOW_READ_MORE,CLOSE_TWEETS_IMAGE,ALL_TWEETS_IMAGE,EVENTS_TWEETS,POSTS_TWEETS,TWEET_DETAIL,QUOTES_TWEETS,VIDEOS_TWEETS,SHOW_OLD_USER_CONFIRMATION_MODAL,CONFIRM_FORGOT_PASSWORD,CONFIRM_USER,FORGOT_PASSWORD,SIGN_IN,SIGN_UP,ALL_TWEETS,SEARCH_TWEETS,LOG_OUT,LOG_IN,LOG_IN_SUCCESS,LOG_IN_FAILURE,SIGN_UP_SUCCESS,SIGN_UP_FAILURE,SHOW_SIGN_UP_CONFIRMATION_MODAL,CONFIRM_SIGNUP,CONFIRM_SIGNUP_SUCCESS,CONFIRM_SIGNUP_FAILURE,} from './actionTypes'
+import {EMPTY_POSTS_MESSAGE,EMPTY_EVENTS_MESSAGE,EMPTY_QUOTES_MESSAGE,EMPTY_ALL_MESSAGE,CLOSE_TWEETS_READMORE,SHOW_READ_MORE,CLOSE_TWEETS_IMAGE,ALL_TWEETS_IMAGE,EVENTS_TWEETS,POSTS_TWEETS,TWEET_DETAIL,QUOTES_TWEETS,VIDEOS_TWEETS,SHOW_OLD_USER_CONFIRMATION_MODAL,CONFIRM_FORGOT_PASSWORD,CONFIRM_USER,FORGOT_PASSWORD,SIGN_IN,SIGN_UP,ALL_TWEETS,SEARCH_TWEETS,LOG_OUT,LOG_IN,LOG_IN_SUCCESS,LOG_IN_FAILURE,SIGN_UP_SUCCESS,SIGN_UP_FAILURE,SHOW_SIGN_UP_CONFIRMATION_MODAL,CONFIRM_SIGNUP,CONFIRM_SIGNUP_SUCCESS,CONFIRM_SIGNUP_FAILURE,} from './actionTypes'
 import Amplify, { Auth } from 'aws-amplify';
 import config from '../Utils/aws-exports';
 import {Alert} from 'react-native';
@@ -264,8 +264,19 @@ export function searchAll(term){
          .then(response => {
            response.json().
            then(json => {
+             let check;
              const tweets=json;
-             dispatch(alltweetlist(tweets))
+             tweets.map(value=>check=value);
+             console.log(check);
+             if(check!==undefined)
+             {
+               dispatch(alltweetlist(tweets))
+             }
+
+             if(check===undefined)
+             {
+               dispatch(emptyAllMessage())
+             }
            })
          })
          .catch();
@@ -287,8 +298,18 @@ export function searchQuotes(term){
                   .then(response => {
                     response.json().
                     then(json => {
+                      let check;
                       const tweets=json;
-                      dispatch(quotestweetlist(tweets))
+                      tweets.map(value=>check=value);
+                      if(check!==undefined)
+                      {
+                        dispatch(quotestweetlist(tweets))
+                      }
+
+                      if(check===undefined)
+                      {
+                        dispatch(emptyQuotesMessage())
+                      }
                     })
                   })
                   .catch();
@@ -315,8 +336,18 @@ export function searchPosts(term){
                 .then(response => {
                   response.json().
                   then(json => {
+                    let check;
                     const tweets=json;
-                    dispatch(poststweetlist(tweets))
+                    tweets.map(value=>check=value);
+                    if(check!==undefined)
+                    {
+                      dispatch(poststweetlist(tweets))
+                    }
+
+                    if(check===undefined)
+                    {
+                      dispatch(emptyPostsMessage())
+                    }
                   })
                 })
                 .catch();
@@ -343,8 +374,18 @@ export function searchEvents(term){
                 .then(response => {
                   response.json().
                   then(json => {
+                    let check;
                     const tweets=json;
-                    dispatch(eventstweetlist(tweets))
+                    tweets.map(value=>check=value);
+                    if(check!==undefined)
+                    {
+                      dispatch(eventstweetlist(tweets))
+                    }
+
+                    if(check===undefined)
+                    {
+                      dispatch(emptyEventsMessage())
+                    }
                   })
                 })
                 .catch();
@@ -360,6 +401,30 @@ function alltweetlist(tweets){
   return{
     type:ALL_TWEETS,
     tweets
+  };
+}
+
+function emptyAllMessage(){
+  return{
+    type:EMPTY_ALL_MESSAGE,
+  };
+}
+
+function emptyQuotesMessage(){
+  return{
+    type:EMPTY_QUOTES_MESSAGE,
+  };
+}
+
+function emptyPostsMessage(){
+  return{
+    type:EMPTY_POSTS_MESSAGE,
+  };
+}
+
+function emptyEventsMessage(){
+  return{
+    type:EMPTY_EVENTS_MESSAGE,
   };
 }
 

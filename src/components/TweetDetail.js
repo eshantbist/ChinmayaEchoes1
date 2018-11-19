@@ -62,12 +62,12 @@ class TweetDetail extends Component{
         const url=tweet.video_url
 
         const content = tweet.content.replace(/<[^>]*>/gm,'');
-        const videoId = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
-        if(videoId != null) {
-           console.log(videoId[1]);
-        } else {
-            console.log("The youtube url is not valid.");
-        }
+        // const videoId = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
+        // if(videoId != null) {
+        //    console.log(videoId[1]);
+        // } else {
+        //     console.log("The youtube url is not valid.");
+        // }
         const width=Dimensions.get('window').width;
         return(
             <View style={styles.mainContainer}>

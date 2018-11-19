@@ -1,6 +1,7 @@
 const initialState = {
   tweets: {},
   tweetsAvailable:false,
+  emptyPostsData:false,
 }
 
 const PostsTweetsReducer=(state=initialState,action)=>{
@@ -9,7 +10,14 @@ const PostsTweetsReducer=(state=initialState,action)=>{
     return {
       ...state,
       tweetsAvailable:true,
+      emptyPostsData:false,
       tweets: action.tweets,
+    }
+
+    case 'EMPTY_POSTS_MESSAGE':
+    return {
+      ...state,
+      emptyPostsData:true,
     }
 
     default:
