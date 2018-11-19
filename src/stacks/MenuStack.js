@@ -54,7 +54,7 @@ const StackNav=createSwitchNavigator(
 class MenuStack extends React.Component {
   render() {
     return (
-      <SafeAreaView style={{flex:1}}>
+      <SafeAreaView style={{flex:1,backgroundColor:'white'}}>
         <LogOutHeader/>
         <StackNav />
       </SafeAreaView>
