@@ -5,6 +5,7 @@ import LogOutHeader from '../containers/LogOutHeader';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 // import YouTube from 'react-native-youtube';
+import Video from 'react-native-video';
 import ResponsiveImage from 'react-native-responsive-image';
 import { ZoomableImage } from 'react-native-zoomable-image';
 import ImageZoom from 'react-native-image-pan-zoom';
@@ -68,6 +69,8 @@ class TweetDetail extends Component{
         // } else {
         //     console.log("The youtube url is not valid.");
         // }
+        //https://d4iuqktqvkqfb.cloudfront.net/OmChinmayayaNamaha.mp4
+        //https://d23u1w5ub3vk8h.cloudfront.net/OmChinmayayaNamahaAdo.mp3
         const width=Dimensions.get('window').width;
         return(
             <View style={styles.mainContainer}>
@@ -78,18 +81,23 @@ class TweetDetail extends Component{
                     Back
                   </Text>
                 </TouchableOpacity>
-                    <View>
 
                         {(tweet.video_url!=='')&&(
-                          <View style={styles.titleView}>
-                            <Text style={styles.title}>{tweet.post_title}</Text>
+                            <View style={styles.video} >
+                              <Video source={{uri: "https://d4iuqktqvkqfb.cloudfront.net/TestVideo/playlist.m3u8"}}
+                               muted={false}
+                               repeat={true}
+                               controls={true}
+                               resizeMode="cover"
+                               paused={false}
+                               style={styles.backgroundVideo}
+                               playInBackground={true}/>
                           </View>
                         )}
 
                         <View style={styles.content}>
                           <Text style={styles.contentMatter}>{content}</Text>
                         </View>
-                    </View>
               </ScrollView>
             </View>
         );
@@ -149,4 +157,14 @@ goBack:{
 chevron:{
   fontSize:16
 },
+backgroundVideo: {
+  height:250,
+  width:'100%',
+  borderRadius:20,
+},
+video:{
+  borderWidth:5,
+  backgroundColor:'black',
+  width:'100%',
+}
 });
