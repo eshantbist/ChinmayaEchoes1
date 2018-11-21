@@ -107,7 +107,7 @@ class TweetDetail extends Component{
                 {(tweet.video_url!=='')&&(
                     <View style={{height:250}} >
                        <VideoPlayer
-                            source={{ uri: url }}
+                            source={{ uri: 'https://gcs-vimeo.akamaized.net/exp=1542807419~acl=%2A%2F730814571.mp4%2A~hmac=d952d5f6dcec82b795edd043f1ea19e691ddaf8bdae2e64cdcfaed0620cd188b/vimeo-prod-skyfire-std-us/01/2541/8/212708323/730814571.mp4' }}
                             toggleResizeModeOnFullscreen={false}
                             onBack={()=>this.onBack()}
                             onEnterFullscreen={()=>this.onFullscreenEnter()}

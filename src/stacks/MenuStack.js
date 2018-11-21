@@ -24,6 +24,7 @@ const MenuStackNav = createMaterialTopTabNavigator({
     Quotes: { screen: QuotesTweetList },
     Posts: { screen: PostsTweetList },
     Events: { screen: EventsTweetList },
+    Videos: { screen: VideosTweetList },
   },
 {
   tabBarOptions: {

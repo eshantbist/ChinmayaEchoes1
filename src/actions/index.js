@@ -1,4 +1,4 @@
-import {FULLSCREEN_OFF,FULLSCREEN_ON,EMPTY_POSTS_MESSAGE,EMPTY_EVENTS_MESSAGE,EMPTY_QUOTES_MESSAGE,EMPTY_ALL_MESSAGE,CLOSE_TWEETS_READMORE,SHOW_READ_MORE,CLOSE_TWEETS_IMAGE,ALL_TWEETS_IMAGE,EVENTS_TWEETS,POSTS_TWEETS,TWEET_DETAIL,QUOTES_TWEETS,VIDEOS_TWEETS,SHOW_OLD_USER_CONFIRMATION_MODAL,CONFIRM_FORGOT_PASSWORD,CONFIRM_USER,FORGOT_PASSWORD,SIGN_IN,SIGN_UP,ALL_TWEETS,SEARCH_TWEETS,LOG_OUT,LOG_IN,LOG_IN_SUCCESS,LOG_IN_FAILURE,SIGN_UP_SUCCESS,SIGN_UP_FAILURE,SHOW_SIGN_UP_CONFIRMATION_MODAL,CONFIRM_SIGNUP,CONFIRM_SIGNUP_SUCCESS,CONFIRM_SIGNUP_FAILURE,} from './actionTypes'
+import {FULLSCREEN_OFF,FULLSCREEN_ON,EMPTY_VIDEOS_MESSAGE,EMPTY_POSTS_MESSAGE,EMPTY_EVENTS_MESSAGE,EMPTY_QUOTES_MESSAGE,EMPTY_ALL_MESSAGE,CLOSE_TWEETS_READMORE,SHOW_READ_MORE,CLOSE_TWEETS_IMAGE,ALL_TWEETS_IMAGE,EVENTS_TWEETS,POSTS_TWEETS,TWEET_DETAIL,QUOTES_TWEETS,VIDEOS_TWEETS,SHOW_OLD_USER_CONFIRMATION_MODAL,CONFIRM_FORGOT_PASSWORD,CONFIRM_USER,FORGOT_PASSWORD,SIGN_IN,SIGN_UP,ALL_TWEETS,SEARCH_TWEETS,LOG_OUT,LOG_IN,LOG_IN_SUCCESS,LOG_IN_FAILURE,SIGN_UP_SUCCESS,SIGN_UP_FAILURE,SHOW_SIGN_UP_CONFIRMATION_MODAL,CONFIRM_SIGNUP,CONFIRM_SIGNUP_SUCCESS,CONFIRM_SIGNUP_FAILURE,} from './actionTypes'
 import Amplify, { Auth } from 'aws-amplify';
 import config from '../Utils/aws-exports';
 import {Alert} from 'react-native';
@@ -10,6 +10,7 @@ import axios from 'axios';
 const quotes_uri=categoryUri+'quotes';
 const posts_uri=categoryUri+'posts';
 const events_uri=categoryUri+'events';
+const videos_uri=categoryUri+'videos';
 function logIn() {
   return {
     type: LOG_IN
@@ -260,6 +261,7 @@ export function searchAll(term){
       dispatch(searchQuotes(term))
       dispatch(searchPosts(term))
       dispatch(searchEvents(term))
+      dispatch(searchVideos(term))
       fetch(url)
          .then(response => {
            response.json().
@@ -397,6 +399,44 @@ export function searchEvents(term){
   }
 }
 
+export function searchVideos(term){
+  return (dispatch) => {
+    const category_url=`${videos_uri}`;
+    fetch(category_url)
+       .then(response => {
+         response.json()
+        .then(json => {
+           json.map(category=>{
+             const id=category.id;
+             const TERM=term;
+             const url = `${uri}?categories=${id}&search=${TERM}`;
+             fetch(url)
+                .then(response => {
+                  response.json().
+                  then(json => {
+                    let check;
+                    const tweets=json;
+                    tweets.map(value=>check=value);
+                    if(check!==undefined)
+                    {
+                      dispatch(videostweetlist(tweets))
+                    }
+
+                    if(check===undefined)
+                    {
+                      dispatch(emptyVideosMessage())
+                    }
+                  })
+                })
+                .catch();
+
+           })
+         })
+       })
+       .catch();
+  }
+}
+
 function alltweetlist(tweets){
   return{
     type:ALL_TWEETS,
@@ -419,6 +459,12 @@ function emptyQuotesMessage(){
 function emptyPostsMessage(){
   return{
     type:EMPTY_POSTS_MESSAGE,
+  };
+}
+
+function emptyVideosMessage(){
+  return{
+    type:EMPTY_VIDEOS_MESSAGE,
   };
 }
 

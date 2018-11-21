@@ -50,6 +50,9 @@ class LogOutHeader extends Component{
     const { AllTweetsReducer: {
       fullScreenVideo
     }} = this.props;
+    // if(fullScreenVideo===true){
+    //   return(<View></View>);
+    // }
     if(this.state.iconClick){
       return(
         <View style={{flexDirection:'row',padding:10,backgroundColor:'#e6e6e6',}}>
