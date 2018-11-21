@@ -132,17 +132,12 @@ const styles=StyleSheet.create({
   chevronView:{
     flex:1,
     fontSize:100,
-    alignItems:'center',
-    justifyContent:'center',
+    alignItems:'flex-end',
+    justifyContent:'flex-end',
+    right:5,
   },
   chevron:{
     color: 'rgba(0,0,0,0.6)',
-    fontSize:100,
-    padding:10,
-    paddingLeft:20,
-    paddingRight:20,
-    borderWidth:1,
-    borderRadius:30,
-    borderColor:'rgba(0,0,0,0.5)'
+    fontSize:50,
   }
 });

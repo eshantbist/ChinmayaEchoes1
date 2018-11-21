@@ -8,6 +8,8 @@ const initialState = {
   image:null,
   tweet:{},
   emptyAllData:false,
+  fullScreenVideo:false,
+
 }
 
 const TweetsReducer=(state=initialState,action)=>{
@@ -50,6 +52,16 @@ const TweetsReducer=(state=initialState,action)=>{
     return {
       ...state,
       emptyAllData:true,
+    }
+    case 'FULLSCREEN_ON':
+    return {
+      ...state,
+      fullScreenVideo:true,
+    }
+    case 'FULLSCREEN_OFF':
+    return {
+      ...state,
+      fullScreenVideo:false,
     }
 
     default:

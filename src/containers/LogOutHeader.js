@@ -47,6 +47,9 @@ class LogOutHeader extends Component{
   }
 
   render(){
+    const { AllTweetsReducer: {
+      fullScreenVideo
+    }} = this.props;
     if(this.state.iconClick){
       return(
         <View style={{flexDirection:'row',padding:10,backgroundColor:'#e6e6e6',}}>
@@ -79,16 +82,16 @@ class LogOutHeader extends Component{
                    Log Out
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={()=>this.checkIconClick()}>
+              {(fullScreenVideo===false)&&<TouchableOpacity onPress={()=>this.checkIconClick()}>
                 <FontAwesome name={'search'} style={styles.searchIcon}/>
-              </TouchableOpacity>
+              </TouchableOpacity>}
             </View>
       </View>
     );
   }
 }
 const mapStateToProps = state => ({
-  SignInReducer: state.SignInReducer
+  SignInReducer: state.SignInReducer,AllTweetsReducer:state.AllTweetsReducer
 })
 
 const mapDispatchToProps=(dispatch)=>{

@@ -11,15 +11,10 @@ import { ZoomableImage } from 'react-native-zoomable-image';
 import ImageZoom from 'react-native-image-pan-zoom';
 import VideoPlayer from 'react-native-video-controls';
 import FastImage from 'react-native-fast-image';
+import {isFullScreenOn,isFullScreenOff} from '../actions';
 
 class TweetDetail extends Component{
 
-    constructor(props) {
-     super(props);
-     this.state = {
-       fullScreenVideo:false,
-     };
-    }
     titleXPos=new Animated.Value(0);
     animatedTitle=(direction=1)=>{
       Animated.timing(
@@ -61,14 +56,16 @@ class TweetDetail extends Component{
     }
 
     onFullscreenEnter=()=>{
-      newHeight = Dimensions.get('window').height;
-      this.setState({fullScreenVideo:true});
+      this.props.isFullScreenOn();
     }
 
     onFullscreenExit=()=>{
-      this.setState({fullScreenVideo:false});
+      this.props.isFullScreenOff();
     }
     render() {
+        const { AllTweetsReducer: {
+          fullScreenVideo
+        }} = this.props;
         const { TweetDetailReducer: {
           tweet
         }} = this.props;
@@ -84,14 +81,12 @@ class TweetDetail extends Component{
         // } else {
         //     console.log("The youtube url is not valid.");
         // }
-        //https://d4iuqktqvkqfb.cloudfront.net/OmChinmayayaNamaha.mp4
-        //https://d23u1w5ub3vk8h.cloudfront.net/OmChinmayayaNamahaAdo.mp3
         const width=Dimensions.get('window').width;
-        if(this.state.fullScreenVideo){
+        if(fullScreenVideo===true){
           return(
             <View style={{height:'100%'}} >
                <VideoPlayer
-                    source={{ uri: 'https://d4iuqktqvkqfb.cloudfront.net/TestVideo/playlist.m3u8' }}
+                    source={{ uri: url }}
                     toggleResizeModeOnFullscreen={true}
                     onBack={()=>this.onFullscreenExit()}
                     onEnterFullscreen={()=>this.onFullscreenEnter()}
@@ -112,7 +107,7 @@ class TweetDetail extends Component{
                 {(tweet.video_url!=='')&&(
                     <View style={{height:250}} >
                        <VideoPlayer
-                            source={{ uri: 'https://d4iuqktqvkqfb.cloudfront.net/TestVideo/playlist.m3u8' }}
+                            source={{ uri: url }}
                             toggleResizeModeOnFullscreen={false}
                             onBack={()=>this.onBack()}
                             onEnterFullscreen={()=>this.onFullscreenEnter()}
@@ -130,10 +125,13 @@ class TweetDetail extends Component{
 }
 
 const mapStateToProps=(state)=>{
-  return{TweetDetailReducer: state.TweetDetailReducer,VideosTweetsReducer:state.VideosTweetsReducer}
+  return{TweetDetailReducer: state.TweetDetailReducer,VideosTweetsReducer:state.VideosTweetsReducer,AllTweetsReducer:state.AllTweetsReducer}
 }
 
-export default connect(mapStateToProps)(TweetDetail);
+const mapDispatchToProps=(dispatch)=>{
+  return bindActionCreators({isFullScreenOn,isFullScreenOff},dispatch);
+}
+export default connect(mapStateToProps,mapDispatchToProps)(TweetDetail);
 
 
 const styles=StyleSheet.create({
