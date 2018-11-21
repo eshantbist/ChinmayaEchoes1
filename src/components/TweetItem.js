@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Dimensions,SafeAreaView,Modal,Linking,Image,ScrollView,TouchableOpacity,Button,View,Text,FlatList,StyleSheet,Platform,Animated,Easing} from 'react-native';
+import {ImageBackground,Dimensions,SafeAreaView,Modal,Linking,Image,ScrollView,TouchableOpacity,Button,View,Text,FlatList,StyleSheet,Platform,Animated,Easing} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FastImage from 'react-native-fast-image';
 import ImageZoom from 'react-native-image-pan-zoom';
@@ -16,16 +16,18 @@ class TweetItem extends Component{
           bottomMargin=20;
         }
         const content = tweet.content.replace(/<[^>]*>/gm,'');
+        const videoUrl=tweet.video_url
+        const lastIndex = videoUrl.lastIndexOf(".");
+        const extension=videoUrl.slice(lastIndex+1);
         let url=tweet.register_url;
         return(
-          <TouchableOpacity key={tweet.id} onPress={this.props.onPress} style={styles.tweet}>
+          <View key={tweet.id} style={styles.tweet}>
             <View style={styles.info}>
-              {(tweet.video_url!=='')&&(<Text style={styles.title}>{tweet.post_title}</Text>)}
               <Text style={[styles.date,{marginBottom:bottomMargin}]}>{tweet.tweet_date}</Text>
               {(tweet.register_url!=='')&&(<TouchableOpacity style={styles.registerButton} onPress={() => Linking.openURL(url)}>
                 <Text>Register</Text>
               </TouchableOpacity>)}
-              <TouchableOpacity onPress={this.props.onImagePress}>
+              {(videoUrl==='')?<TouchableOpacity onPress={this.props.onImagePress}>
                 <FastImage
                   style={{height:300, width:'100%'}}
                   source={{
@@ -35,12 +37,24 @@ class TweetItem extends Component{
                   resizeMode={FastImage.resizeMode.cover}
                 />
               </TouchableOpacity>
+              : <View style={{marginTop:10}}>
+                  <ImageBackground
+                      source={{uri: tweet.featured_image}}
+                      style={{resizeMode: 'cover',height:300, width:'100%'}}>
+                      <TouchableOpacity onPress={this.props.onPress} style={styles.chevronView}>
+                        <FontAwesome name={'play-circle'} style={styles.chevron} />
+                      </TouchableOpacity>
+                  </ImageBackground>
+                  </View>
+              }
               <Text style={styles.content}>{content.slice(0,100)}</Text>
             </View>
+            <TouchableOpacity onPress={this.props.onPress}>
             <View style={styles.readMore}>
                 <Text style={{color:'#999999'}} >Read More...</Text>
             </View>
-          </TouchableOpacity>
+            </TouchableOpacity>
+          </View>
         );
     }
 }
@@ -114,5 +128,21 @@ const styles=StyleSheet.create({
     justifyContent:'center',
     alignItems:'center',
     backgroundColor:'white'
+  },
+  chevronView:{
+    flex:1,
+    fontSize:100,
+    alignItems:'center',
+    justifyContent:'center',
+  },
+  chevron:{
+    color: 'rgba(0,0,0,0.6)',
+    fontSize:100,
+    padding:10,
+    paddingLeft:20,
+    paddingRight:20,
+    borderWidth:1,
+    borderRadius:30,
+    borderColor:'rgba(0,0,0,0.5)'
   }
 });

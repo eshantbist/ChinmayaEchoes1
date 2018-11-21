@@ -125,7 +125,7 @@ class AllTweetList extends Component{
                 />
                 {
                   imageModalVisibility && (
-                    <Modal onRequestClose={this.props.closeImageModal} transparent={false} >
+                    <Modal onRequestClose={this.props.closeImageModal} transparent={false} animationType='fade'>
                       <SafeAreaView style={styles.ImageModal}>
                         <TouchableOpacity onPress={this.props.closeImageModal} style={styles.closeModal}>
                           <FontAwesome name={'times-circle'} style={styles.closeImage}/>

@@ -17,6 +17,7 @@ const SignInReducer=(state = initialState, action) => {
       }
     case 'LOG_IN_SUCCESS':
       return {
+        signInErrorMessage: '',
         isAuthenticating: false,
         user: action.user,
         showLoadingModel:false,

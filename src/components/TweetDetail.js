@@ -9,10 +9,17 @@ import Video from 'react-native-video';
 import ResponsiveImage from 'react-native-responsive-image';
 import { ZoomableImage } from 'react-native-zoomable-image';
 import ImageZoom from 'react-native-image-pan-zoom';
+import VideoPlayer from 'react-native-video-controls';
 import FastImage from 'react-native-fast-image';
 
 class TweetDetail extends Component{
 
+    constructor(props) {
+     super(props);
+     this.state = {
+       fullScreenVideo:false,
+     };
+    }
     titleXPos=new Animated.Value(0);
     animatedTitle=(direction=1)=>{
       Animated.timing(
@@ -53,6 +60,14 @@ class TweetDetail extends Component{
       this.props.navigation.navigate('Auth');
     }
 
+    onFullscreenEnter=()=>{
+      newHeight = Dimensions.get('window').height;
+      this.setState({fullScreenVideo:true});
+    }
+
+    onFullscreenExit=()=>{
+      this.setState({fullScreenVideo:false});
+    }
     render() {
         const { TweetDetailReducer: {
           tweet
@@ -72,6 +87,19 @@ class TweetDetail extends Component{
         //https://d4iuqktqvkqfb.cloudfront.net/OmChinmayayaNamaha.mp4
         //https://d23u1w5ub3vk8h.cloudfront.net/OmChinmayayaNamahaAdo.mp3
         const width=Dimensions.get('window').width;
+        if(this.state.fullScreenVideo){
+          return(
+            <View style={{height:'100%'}} >
+               <VideoPlayer
+                    source={{ uri: 'https://d4iuqktqvkqfb.cloudfront.net/TestVideo/playlist.m3u8' }}
+                    toggleResizeModeOnFullscreen={true}
+                    onBack={()=>this.onFullscreenExit()}
+                    onEnterFullscreen={()=>this.onFullscreenEnter()}
+                    onExitFullscreen={()=>this.onFullscreenExit()}
+                />
+            </View>
+          )
+        }
         return(
             <View style={styles.mainContainer}>
               <ScrollView>
@@ -81,20 +109,17 @@ class TweetDetail extends Component{
                     Back
                   </Text>
                 </TouchableOpacity>
-
-                        {(tweet.video_url!=='')&&(
-                            <View style={styles.video} >
-                              <Video source={{uri: "https://d4iuqktqvkqfb.cloudfront.net/TestVideo/playlist.m3u8"}}
-                               muted={false}
-                               repeat={true}
-                               controls={true}
-                               resizeMode="cover"
-                               paused={false}
-                               style={styles.backgroundVideo}
-                               playInBackground={true}/>
-                          </View>
-                        )}
-
+                {(tweet.video_url!=='')&&(
+                    <View style={{height:250}} >
+                       <VideoPlayer
+                            source={{ uri: 'https://d4iuqktqvkqfb.cloudfront.net/TestVideo/playlist.m3u8' }}
+                            toggleResizeModeOnFullscreen={false}
+                            onBack={()=>this.onBack()}
+                            onEnterFullscreen={()=>this.onFullscreenEnter()}
+                            onExitFullscreen={()=>this.onFullscreenExit()}
+                        />
+                    </View>
+                )}
                         <View style={styles.content}>
                           <Text style={styles.contentMatter}>{content}</Text>
                         </View>
@@ -157,14 +182,4 @@ goBack:{
 chevron:{
   fontSize:16
 },
-backgroundVideo: {
-  height:250,
-  width:'100%',
-  borderRadius:20,
-},
-video:{
-  borderWidth:5,
-  backgroundColor:'black',
-  width:'100%',
-}
 });
