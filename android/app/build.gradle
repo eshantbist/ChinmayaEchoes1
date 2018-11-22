@@ -148,6 +148,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-orientation')
     compile project(':react-native-fast-image')
     compile project(':amazon-cognito-identity-js')
     compile project(':react-native-video')

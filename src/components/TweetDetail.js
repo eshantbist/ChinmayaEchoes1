@@ -13,6 +13,7 @@ import VideoPlayer from 'react-native-video-controls';
 import FastImage from 'react-native-fast-image';
 import {isFullScreenOn,isFullScreenOff} from '../actions';
 
+let height=50
 class TweetDetail extends Component{
 
     titleXPos=new Animated.Value(0);
@@ -48,6 +49,7 @@ class TweetDetail extends Component{
       const { TweetDetailReducer: {
         gotoScreen
       }} = this.props;
+      height=50
       this.props.navigation.navigate(gotoScreen)
     }
 
@@ -57,10 +59,12 @@ class TweetDetail extends Component{
 
     onFullscreenEnter=()=>{
       this.props.isFullScreenOn();
+      height=100;
     }
 
     onFullscreenExit=()=>{
       this.props.isFullScreenOff();
+      height=50;
     }
     render() {
         const { AllTweetsReducer: {
@@ -82,43 +86,30 @@ class TweetDetail extends Component{
         //     console.log("The youtube url is not valid.");
         // }
         const width=Dimensions.get('window').width;
-        if(fullScreenVideo===true){
-          return(
-            <View style={{height:'100%'}} >
-               <VideoPlayer
-                    source={{ uri: url }}
-                    toggleResizeModeOnFullscreen={true}
-                    onBack={()=>this.onFullscreenExit()}
-                    onEnterFullscreen={()=>this.onFullscreenEnter()}
-                    onExitFullscreen={()=>this.onFullscreenExit()}
-                />
-            </View>
-          )
-        }
         return(
-            <View style={styles.mainContainer}>
-              <ScrollView>
-                <TouchableOpacity onPress={()=>this.onBack()} style={styles.goBack}>
-                  <Text style={styles.backLink}>
-                    <FontAwesome name={'chevron-left'} style={styles.chevron}/>
-                    Back
-                  </Text>
-                </TouchableOpacity>
-                {(tweet.video_url!=='')&&(
-                    <View style={{height:250}} >
-                       <VideoPlayer
-                            source={{ uri: 'https://gcs-vimeo.akamaized.net/exp=1542807419~acl=%2A%2F730814571.mp4%2A~hmac=d952d5f6dcec82b795edd043f1ea19e691ddaf8bdae2e64cdcfaed0620cd188b/vimeo-prod-skyfire-std-us/01/2541/8/212708323/730814571.mp4' }}
-                            toggleResizeModeOnFullscreen={false}
-                            onBack={()=>this.onBack()}
-                            onEnterFullscreen={()=>this.onFullscreenEnter()}
-                            onExitFullscreen={()=>this.onFullscreenExit()}
-                        />
-                    </View>
-                )}
+            <View style={{flex:1,flexDirection:'column'}}>
+            {(fullScreenVideo===false)&&<TouchableOpacity onPress={()=>this.onBack()} style={styles.goBack}>
+              <Text style={styles.backLink}>
+                <FontAwesome name={'chevron-left'} style={styles.chevron}/>
+                Back
+              </Text>
+            </TouchableOpacity>}
+            {(tweet.video_url!=='')&&(
+                <View style={{height:`${height}%`}} >
+                   <VideoPlayer
+                        source={{ uri: url }}
+                        toggleResizeModeOnFullscreen={false}
+                        onBack={()=>this.onBack()}
+                        onEnterFullscreen={()=>this.onFullscreenEnter()}
+                        onExitFullscreen={()=>this.onFullscreenExit()}
+                    />
+                </View>
+            )}
+              {(height!==100)&&<ScrollView>
                         <View style={styles.content}>
                           <Text style={styles.contentMatter}>{content}</Text>
                         </View>
-              </ScrollView>
+              </ScrollView>}
             </View>
         );
    }

@@ -62,6 +62,7 @@
 		E72A8108FA914EE7816913DC /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 217A1AF607D84A55B789A5CA /* libRNVectorIcons.a */; };
 		E73528D4742F4A4D8F6F8ADE /* libRNVectorIcons-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5F7E4909EA491A8548463D /* libRNVectorIcons-tvOS.a */; };
 		E9656333DC7249DEA2277F8F /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 309BCE74A4194A42AD30BA5A /* Entypo.ttf */; };
+		EC03A7AD21A6736D00434A2F /* libRCTOrientation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC03A78D21A6733F00434A2F /* libRCTOrientation.a */; };
 		EC07376A21831C3E0036498F /* libRCTYouTube.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC07376321831C130036498F /* libRCTYouTube.a */; settings = {ATTRIBUTES = (Weak, ); }; };
 		EC3D4B6521883D2700680218 /* libFastImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC3D4B3821883D1700680218 /* libFastImage.a */; };
 		EC719C8921843C370020ED3C /* libRNAWSCognito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC719C8621843C1E0020ED3C /* libRNAWSCognito.a */; };
@@ -343,6 +344,13 @@
 			remoteGlobalIDString = 358F4ED71D1E81A9004DF814;
 			remoteInfo = RCTBlob;
 		};
+		EC03A78C21A6733F00434A2F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC03A77821A6733F00434A2F /* RCTOrientation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTOrientation;
+		};
 		EC07374B21831BE10036498F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3F27670BFE47449A940DD4F8 /* RNVectorIcons.xcodeproj */;
@@ -475,6 +483,7 @@
 		C53D8F35160A4A9A927CD947 /* AppCenterReactNativeCrashes.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AppCenterReactNativeCrashes.xcodeproj; path = "../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes.xcodeproj"; sourceTree = "<group>"; };
 		D0B7DD83025A450E86C887F4 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		D90F82E4B75C4EE59962DE81 /* AppCenterReactNative.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AppCenterReactNative.xcodeproj; path = ../node_modules/appcenter/ios/AppCenterReactNative.xcodeproj; sourceTree = "<group>"; };
+		EC03A77821A6733F00434A2F /* RCTOrientation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTOrientation.xcodeproj; path = "../node_modules/react-native-orientation/iOS/RCTOrientation.xcodeproj"; sourceTree = "<group>"; };
 		EC07375E21831C120036498F /* RCTYouTube.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTYouTube.xcodeproj; path = "../node_modules/react-native-youtube/RCTYouTube.xcodeproj"; sourceTree = "<group>"; };
 		EC3D4B2F21883D1600680218 /* FastImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FastImage.xcodeproj; path = "../node_modules/react-native-fast-image/ios/FastImage.xcodeproj"; sourceTree = "<group>"; };
 		EC719C5721843C1E0020ED3C /* RNAWSCognito.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNAWSCognito.xcodeproj; path = "../node_modules/amazon-cognito-identity-js/ios/RNAWSCognito.xcodeproj"; sourceTree = "<group>"; };
@@ -499,6 +508,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC03A7AD21A6736D00434A2F /* libRCTOrientation.a in Frameworks */,
 				EC3D4B6521883D2700680218 /* libFastImage.a in Frameworks */,
 				ECEB0FB82184804100B00B32 /* libRCTVideo.a in Frameworks */,
 				EC719C8921843C370020ED3C /* libRNAWSCognito.a in Frameworks */,
@@ -717,6 +727,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				EC03A77821A6733F00434A2F /* RCTOrientation.xcodeproj */,
 				EC3D4B2F21883D1600680218 /* FastImage.xcodeproj */,
 				ECEB0FAF2184802600B00B32 /* RCTVideo.xcodeproj */,
 				EC719C5721843C1E0020ED3C /* RNAWSCognito.xcodeproj */,
@@ -807,6 +818,14 @@
 				D0B7DD83025A450E86C887F4 /* Zocial.ttf */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		EC03A77921A6733F00434A2F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC03A78D21A6733F00434A2F /* libRCTOrientation.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		EC07371C21831BE10036498F /* Recovered References */ = {
@@ -1054,6 +1073,10 @@
 				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = EC03A77921A6733F00434A2F /* Products */;
+					ProjectRef = EC03A77821A6733F00434A2F /* RCTOrientation.xcodeproj */;
 				},
 				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
@@ -1360,6 +1383,13 @@
 			fileType = archive.ar;
 			path = libRCTBlob.a;
 			remoteRef = ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EC03A78D21A6733F00434A2F /* libRCTOrientation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTOrientation.a;
+			remoteRef = EC03A78C21A6733F00434A2F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		EC07374C21831BE10036498F /* libRNVectorIcons.a */ = {
@@ -1752,6 +1782,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.chinmayamission.echoes;
 				PRODUCT_NAME = ChinmayaEchoes;
 				PROVISIONING_PROFILE_SPECIFIER = "Wildcard Profile for CCMT Apps";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1784,6 +1815,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.chinmayamission.echoes;
 				PRODUCT_NAME = ChinmayaEchoes;
 				PROVISIONING_PROFILE_SPECIFIER = "Wildcard Profile for CCMT Apps";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
