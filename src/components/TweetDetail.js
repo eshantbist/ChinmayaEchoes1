@@ -51,6 +51,7 @@ class TweetDetail extends Component{
       }} = this.props;
       height=50
       this.props.navigation.navigate(gotoScreen)
+      this.props.isFullScreenOff();
     }
 
     onlogout=()=>{
